@@ -188,7 +188,7 @@ function GlobalSearch({ data, onNavigate }) {
 
           {/* AI Answer */}
           {(aiAnswer || aiLoading) && (
-            <div className="p-4 border-b border-border bg-muted/30">
+            <div className="p-4 border-b border-border border-l-2 border-l-primary bg-primary/[0.03]">
               <div className="flex items-center gap-1.5 mb-2">
                 <Sparkles size={11} className="text-primary" />
                 <span className="text-2xs font-semibold text-primary uppercase tracking-wider">AI Answer</span>
@@ -437,6 +437,73 @@ function BarChart({ data, valueKey = 'count', labelKey = 'name' }) {
   )
 }
 
+// ─── icp source card ─────────────────────────────────────────────────────
+
+function IcpSourceCard({ sourceCounts, phrases }) {
+  const [expanded, setExpanded] = useState(null)
+  const max = Math.max(...sourceCounts.map(d => d.count), 1)
+
+  const phrasesBySource = useMemo(() => {
+    const map = {}
+    phrases.forEach(p => {
+      const b = bucketOf(p.source)
+      if (!map[b]) map[b] = []
+      map[b].push(p)
+    })
+    return map
+  }, [phrases])
+
+  return (
+    <Card>
+      <SectionHeader
+        title="ICP Source Breakdown"
+        description="Where your customers' exact language was found — click a source to see the phrases"
+      />
+      <div className="divide-y divide-border">
+        {sourceCounts.map(row => {
+          const isOpen = expanded === row.name
+          const sourcePhrases = phrasesBySource[row.name] || []
+          return (
+            <div key={row.name}>
+              <button
+                onClick={() => setExpanded(isOpen ? null : row.name)}
+                className="w-full flex items-center gap-3 px-6 py-3 hover:bg-muted/40 transition-colors text-left"
+              >
+                <span className="w-20 text-xs text-muted-foreground shrink-0">{row.name}</span>
+                <div className="flex-1 bg-muted rounded-full h-1 overflow-hidden">
+                  <div
+                    className="h-full bg-foreground/70 rounded-full"
+                    style={{ width: `${Math.round((row.count / max) * 100)}%`, transition: 'width 0.5s ease' }}
+                  />
+                </div>
+                <span className="text-xs tabular-nums text-muted-foreground w-5 text-right">{row.count}</span>
+                <ChevronRight size={12} className={`text-muted-foreground ml-1 transition-transform ${isOpen ? 'rotate-90' : ''}`} />
+              </button>
+              {isOpen && (
+                <div className="bg-muted/30 border-t border-border divide-y divide-border/60">
+                  <div className="px-6 py-2">
+                    <p className="text-2xs text-muted-foreground uppercase tracking-widest">
+                      {row.count} phrase{row.count !== 1 ? 's' : ''} from {row.name} — exact language used by your market
+                    </p>
+                  </div>
+                  {sourcePhrases.map(p => (
+                    <div key={p.id} className="px-6 py-2.5 flex items-start gap-3">
+                      <p className="text-sm text-foreground flex-1">"{p.text}"</p>
+                      <div className="flex gap-1 shrink-0">
+                        {(p.teams || []).map(t => <Tag key={t}>{t}</Tag>)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </Card>
+  )
+}
+
 // ─── overview ────────────────────────────────────────────────────────────
 
 function OverviewPage({ data }) {
@@ -516,10 +583,7 @@ function OverviewPage({ data }) {
           </Card>
         )}
         {sourceCounts.length > 0 && (
-          <Card>
-            <SectionHeader title="ICP Source Breakdown" description="Number of ICP phrases by source — where your customers' exact language was found" />
-            <div className="p-6"><BarChart data={sourceCounts} /></div>
-          </Card>
+          <IcpSourceCard sourceCounts={sourceCounts} phrases={data.icp_phrases || []} />
         )}
       </div>
 
