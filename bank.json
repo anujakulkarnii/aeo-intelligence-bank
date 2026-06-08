@@ -1,0 +1,2776 @@
+{
+  "meta": {
+    "company": "FrontlineHQ",
+    "last_run": "2026-06-08T15:12:03.549283+00:00",
+    "run_count": 3,
+    "markets": [
+      "US"
+    ],
+    "geo_note": "Phase 1 — US/UK via SearchAPI location parameter. Not VPN-based. Geographic precision is approximate. Phase 2 will add DACH with German language query variants and proxy-based geo execution.",
+    "steps_completed": [
+      "fanout",
+      "geo_searches",
+      "community_searches",
+      "icp_extraction",
+      "transcripts",
+      "hypotheses",
+      "next_queries",
+      "synthesis"
+    ],
+    "steps_failed": []
+  },
+  "icp_phrases": [
+    {
+      "id": "3d2df9d7",
+      "text": "almost impossible to adequately train a new staff in a single existing location",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "a8dda883",
+      "text": "persistent real-time knowledge execution gap; frontline employees",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "87b62375",
+      "text": "consistent quality across locations",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "4057b5d7",
+      "text": "high turnover, and my 25 years of staffing experience tells me the problem is organizational",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "f6ed62f7",
+      "text": "very simple staff onboarding, otherwise restaurants will drop it",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "46594e6a",
+      "text": "The biggest complaint from associates is lack of training",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "5174856f",
+      "text": "staff management was chaos",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "ad0c287e",
+      "text": "We've grown fast and I barely know who's working where",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "fbc47539",
+      "text": "Knowing your schedule is your responsibility",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "d2fee1d4",
+      "text": "we list our opening times, our kitchen times which is split for cleaning and menu change, and 5min before closing",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "5be7aa0b",
+      "text": "workforce management platform built for the world's frontline",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "4b2c5bc2",
+      "text": "simplifies employee scheduling, time tracking, labor compliance, HR management and team communication",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "6e9c6da3",
+      "text": "build smart schedules in minutes, track hours",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "20b43c9b",
+      "text": "export timesheets to payroll with a click, and stay compliant easily",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "bf63c491",
+      "text": "unleash the potential of their frontline workforce",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "5af9640a",
+      "text": "engaging learning experience and effective microlearning approach, which helps reinforce knowledge retention",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "hot": true
+    },
+    {
+      "id": "71d497e7",
+      "text": "information being out of date or missing. As well as how challenging it is to keep onboarding docs up to date",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "10cdeb2c",
+      "text": "They bug us to do it every single day, and if our clerks don't do it, they bug more",
+      "source": "mixed",
+      "geography": "US",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "bedc8a75",
+      "text": "I received 8 texts this morning because clerks in my department haven't",
+      "source": "mixed",
+      "geography": "US",
+      "teams": [
+        "Sales",
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "b3af2d76",
+      "text": "handling frontline employee communication across multiple locations",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "41821414",
+      "text": "1 worked for a week then stopped showing up",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "80b185b2",
+      "text": "I have been trying to staff my restaurant for about a month now",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "0285c82b",
+      "text": "Building from scratch maybe have a quick meeting with your #1 trainer(s)",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "9d02b18f",
+      "text": "top-heavy with management while frontline staff are drowning",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "e7268b79",
+      "text": "User friendly interface Easy to navigate and create tickets",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "ba65befe",
+      "text": "easier to hire, schedule and track time worked by frontline in medium and large-sized businesses",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "hot": true
+    },
+    {
+      "id": "23f9eb44",
+      "text": "300-page binders",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "72c3be19",
+      "text": "how challenging it is to keep onboarding docs up to date",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "48e877b5",
+      "text": "information being out of date or missing",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "5753c4f7",
+      "text": "I do a phone interview, then me",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "7a38ea57",
+      "text": "trying to staff my restaurant for about a month now",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "b009e5a0",
+      "text": "frontline employee communication across multiple locations",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Sales",
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "8c850098",
+      "text": "Consistency is key",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "331d620d",
+      "text": "how to manage multiple burger chain locations properly",
+      "source": "reddit",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "5b36fa47",
+      "text": "quick meeting with your #1 trainer(s) and identify everything that needs to be taught",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "1154a4ff",
+      "text": "Building from scratch",
+      "source": "reddit",
+      "geography": "US",
+      "teams": [
+        "Social",
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "3ff18880",
+      "text": "5min before closing is at our discretion",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "1bf92781",
+      "text": "we list our opening times, our kitchen times (which is split for cleaning and menu change) and our happy hour times",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "bd5ee6a6",
+      "text": "track time and attendance, schedule staff, manage leave, export timesheets to payroll with a click",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    },
+    {
+      "id": "8b587d97",
+      "text": "stay compliant easily",
+      "source": "mixed",
+      "geography": "Unknown",
+      "teams": [
+        "Sales",
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "hot": true
+    }
+  ],
+  "fanout_terms": [
+    {
+      "id": "ca366ae5",
+      "term": "standardized employee onboarding procedures multi-location",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "edb11d7b",
+      "term": "knowledge transfer inconsistency retail chains",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "18742134",
+      "term": "training variability reduction hospitality industry",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "e3b32d73",
+      "term": "peer-to-peer training quality control systems",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "8190ca04",
+      "term": "manager-dependent training elimination software",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "904eb656",
+      "term": "training completion tracking compliance tools",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "f9509079",
+      "term": "skills certification verification frontline workers",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "38f6b9ed",
+      "term": "LMS for restaurant chains compliance tracking",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "6e6d24d1",
+      "term": "multi-location training consistency audit tools",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "ccaef026",
+      "term": "franchise training standardization software",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "08c3798d",
+      "term": "restaurant employee onboarding checklist templates",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "d5be0580",
+      "term": "QSR training program ROI metrics",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "92a04f2c",
+      "term": "digital SOP delivery multi-site restaurants",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "9c8fad77",
+      "term": "training completion rates franchise locations",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "ff061210",
+      "term": "multi-location workforce visibility software",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "a8cc928f",
+      "term": "real-time task tracking across retail locations",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "6c396ffe",
+      "term": "operational chaos rapid expansion hospitality",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "d9c13a0e",
+      "term": "shift accountability tools multiple sites",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "7d3a660c",
+      "term": "centralized ops dashboard franchise management",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "8779a077",
+      "term": "employee task completion verification retail chains",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "881bdc98",
+      "term": "location manager performance visibility",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "962c24ad",
+      "term": "frontline workforce management software alternatives",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "4b7ade33",
+      "term": "deskless team communication platform comparison",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "cd2327b8",
+      "term": "retail operations management vs notion",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "86f46adf",
+      "term": "hospitality staff scheduling integrated communication",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "7729f220",
+      "term": "frontline employee engagement tools with task management",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "594e255c",
+      "term": "shift-based workforce collaboration software",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "0a40941f",
+      "term": "multi-location team coordination platform",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "10ee35df",
+      "term": "restaurant employee onboarding checklist template",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "0c1a8d7c",
+      "term": "front of house back of house training timeline",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "48258a5c",
+      "term": "multi-location restaurant standardized onboarding",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "189dcb60",
+      "term": "food safety certification tracking onboarding",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "f7444172",
+      "term": "restaurant staff retention rates onboarding impact",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "b5d6f313",
+      "term": "POS system training integration onboarding",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "8d513522",
+      "term": "restaurant labor cost reduction through onboarding",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "c39a6eaa",
+      "term": "standardized onboarding procedures hospitality",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "f63ec9f4",
+      "term": "training consistency across multiple locations retail",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "21d6509e",
+      "term": "knowledge transfer variability frontline teams",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "4ab3e9c2",
+      "term": "trainer-dependent performance gaps",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "158b7293",
+      "term": "employee onboarding quality control systems",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "946bb5da",
+      "term": "skills assessment tracking new hires",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "3be14283",
+      "term": "standardized training content delivery platform",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "4ffd8c71",
+      "term": "multi-location restaurant training software with compliance tracking",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "01c48214",
+      "term": "franchise training consistency tools",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "5e0d0030",
+      "term": "restaurant SOP digital distribution platform",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "193c6f77",
+      "term": "centralized training content management system for QSR",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "d1a576b4",
+      "term": "mobile-first training app for restaurant staff",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "3dd74556",
+      "term": "restaurant training completion rates by location dashboard",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "7d111083",
+      "term": "automated onboarding workflows for multi-unit restaurants",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "670cd71b",
+      "term": "multi-location workforce visibility software",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "791afc96",
+      "term": "real-time employee location tracking retail",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "cae5422b",
+      "term": "task completion verification hospitality chains",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "4b3e43b1",
+      "term": "operational accountability multi-site businesses",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "7487bb3e",
+      "term": "distributed team coordination software fast-growing companies",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "5d0e371a",
+      "term": "shift compliance monitoring franchise operations",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "1fca4575",
+      "term": "workforce deployment analytics restaurant chains",
+      "query": "grew fast now I don't know who is doing what where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "19064fee",
+      "term": "frontline team communication platform comparison",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "3c885f02",
+      "term": "notion alternatives for shift-based workforce",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "bd9f2e1f",
+      "term": "slack replacement for deskless employees",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "03a96a9b",
+      "term": "integrated task management and messaging for hourly workers",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "1f277bcb",
+      "term": "mobile-first operations software for retail chains",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "f41e6ce9",
+      "term": "centralized SOP distribution for multi-location teams",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "c606c5f1",
+      "term": "real-time incident reporting for frontline staff",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "fa4f2753",
+      "term": "restaurant employee onboarding checklist template",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "6e3998fe",
+      "term": "hospitality training documentation system",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "aa453950",
+      "term": "food safety certification tracking software",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "976f4fd5",
+      "term": "multi-location restaurant staff training standardization",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "3f66d68d",
+      "term": "restaurant turnover reduction onboarding best practices",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "55402f95",
+      "term": "POS system training integration for new hires",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "97c9aaed",
+      "term": "restaurant compliance training tracking audit trail",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "1862cf6e",
+      "term": "standardized employee onboarding procedures",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "19b7a8c1",
+      "term": "training consistency across multiple locations",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "42fd90e8",
+      "term": "knowledge transfer variability retail hospitality",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "2e06655b",
+      "term": "manager-dependent training outcomes",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "98f8a7ec",
+      "term": "franchise training standardization software",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "8a0052da",
+      "term": "reducing training quality variance multi-site operations",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "274192a6",
+      "term": "peer-to-peer training inconsistency solutions",
+      "query": "training quality depends on who happens to train new staff",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "92d67fe4",
+      "term": "multi-location restaurant training software",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "a346a99a",
+      "term": "franchise training consistency tools",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "d36eae4c",
+      "term": "digital SOP delivery for chain restaurants",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "9448536f",
+      "term": "mobile-first training platform hospitality",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "8d98ed2a",
+      "term": "training completion tracking multiple sites",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "a6ee961a",
+      "term": "brand standards compliance measurement",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "b42aaf65",
+      "term": "onboarding automation restaurant chains",
+      "query": "how to standardise training across multiple restaurant locations",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "6973c580",
+      "term": "frontline employee communication software alternatives",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "2d3cf53a",
+      "term": "deskless workforce management platforms comparison",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "72ef70ad",
+      "term": "shift-based team collaboration tools",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "c18e0779",
+      "term": "operational task management for hourly workers",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "6890e808",
+      "term": "compliance tracking for multi-location teams",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "58881bd4",
+      "term": "notion slack limitations for non-desk workers",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "4fa7a8a3",
+      "term": "mobile-first workforce coordination software",
+      "query": "replace notion and slack for managing frontline teams",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "a3ce824a",
+      "term": "restaurant employee onboarding checklist template",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "24b4843f",
+      "term": "FOH BOH staff training timeline multi-location",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "88be2fd6",
+      "term": "hospitality onboarding compliance food safety alcohol service",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "7dfa434e",
+      "term": "restaurant staff retention rates onboarding impact",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "e101a0fd",
+      "term": "digital onboarding software QSR full service restaurants",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "5936e438",
+      "term": "new hire first week training restaurant operations",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "2c397b32",
+      "term": "restaurant onboarding documentation labor law requirements",
+      "query": "staff onboarding program from scratch restaurant",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "3d856f37",
+      "term": "recipe standardization software multi-location restaurants",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "19dc79af",
+      "term": "kitchen staff training consistency hospitality",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "6e40c231",
+      "term": "food quality control systems chain restaurants",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "48886aa5",
+      "term": "SOPs standard operating procedures restaurant chains",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "c5c24d95",
+      "term": "franchise food consistency management tools",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "19cc2824",
+      "term": "prep method documentation restaurant operations",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "3206a2e0",
+      "term": "brand consistency hospitality training platforms",
+      "query": "restaurant tastes different at each location training problem",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "cdb596ed",
+      "term": "restaurant employee no-call no-show policy",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "5f38931b",
+      "term": "retail new hire abandonment first week",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "90b31b29",
+      "term": "hospitality staff ghosting prevention software",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "526e61bd",
+      "term": "automatic termination workflow no-show employees",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "03ef8258",
+      "term": "probationary period attendance tracking system",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "c0030993",
+      "term": "multi-location employee onboarding completion rates",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "94c4d48c",
+      "term": "frontline worker engagement first 30 days retention",
+      "query": "new hire worked one week then stopped showing up",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "1ee51e5a",
+      "term": "minimum experience required shift manager trainer",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "f6ffc11c",
+      "term": "onboarding standardization tools multi-location retail",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "bfe81dff",
+      "term": "institutional knowledge transfer hospitality",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "3c11e56f",
+      "term": "training certification requirements new shift supervisors",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "212777e0",
+      "term": "digital training playbooks frontline staff",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "6406a9d2",
+      "term": "manager readiness assessment retail operations",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "f20e9225",
+      "term": "structured onboarding programs hospitality chains",
+      "query": "shift manager training new people but she only been here 8 months",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "9377c822",
+      "term": "multi-location employee scheduling software",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "0b1d6c60",
+      "term": "workforce visibility across restaurant locations",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "57f3ac65",
+      "term": "staff roster management for expanding retail chains",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "ae69758a",
+      "term": "real-time employee location tracking hospitality",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "5e47e105",
+      "term": "centralized team directory multi-site operations",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "c965d569",
+      "term": "labor deployment visibility growth phase",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "c3cbc441",
+      "term": "workforce planning tools scaling businesses",
+      "query": "grew too fast now I don't know who works where",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "292169a1",
+      "term": "employee software adoption rates hospitality retail",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "f1cbff2b",
+      "term": "frontline worker technology resistance causes",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "848d2a72",
+      "term": "mobile-first interface adoption statistics hourly workers",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "718865db",
+      "term": "shift worker software training time requirements",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "fac823e8",
+      "term": "legacy system migration employee pushback multi-location",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "834d6f32",
+      "term": "deskless workforce digital literacy barriers",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "a5025cdd",
+      "term": "quick implementation low-friction onboarding frontline teams",
+      "query": "software doesn't matter if employees won't actually use it",
+      "frontlinehq_present": false,
+      "teams": [
+        "Product"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    }
+  ],
+  "citations": [
+    {
+      "id": "94f2d9a2",
+      "query": "training quality depends on who happens to train new staff",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "5937d20b",
+      "query": "how to standardise training across multiple restaurant locations",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "0cd193b8",
+      "query": "grew fast now I don't know who is doing what where",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "991e739e",
+      "query": "replace notion and slack for managing frontline teams",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "d536ce9d",
+      "query": "staff onboarding program from scratch restaurant",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "c6d5afac",
+      "query": "training quality depends on who happens to train new staff",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "a8db3106",
+      "query": "how to standardise training across multiple restaurant locations",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "151e7688",
+      "query": "grew fast now I don't know who is doing what where",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "aef2a1ba",
+      "query": "replace notion and slack for managing frontline teams",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "1a6777dc",
+      "query": "staff onboarding program from scratch restaurant",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "0064b846",
+      "query": "training quality depends on who happens to train new staff",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "af4501b0",
+      "query": "how to standardise training across multiple restaurant locations",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "6bb00826",
+      "query": "grew fast now I don't know who is doing what where",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "59d59133",
+      "query": "replace notion and slack for managing frontline teams",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "fc0c534e",
+      "query": "staff onboarding program from scratch restaurant",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "8ce0837b",
+      "query": "restaurant tastes different at each location training problem",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "86c752ad",
+      "query": "new hire worked one week then stopped showing up",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "e126ce58",
+      "query": "shift manager training new people but she only been here 8 months",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "464eaeb9",
+      "query": "grew too fast now I don't know who works where",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    },
+    {
+      "id": "c1fee169",
+      "query": "software doesn't matter if employees won't actually use it",
+      "market": "US",
+      "frontlinehq_appears": false,
+      "competitors_cited": [],
+      "gap_analysis": "FrontlineHQ not directly cited; opportunity exists",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales",
+        "Product"
+      ]
+    }
+  ],
+  "competitor_complaints": [
+    {
+      "id": "3e96b7b0",
+      "tool": "Axonify",
+      "complaint": "it should be more accurate, but it's the same training program for all divisions, who all have different needs",
+      "source": "reddit",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales"
+      ]
+    },
+    {
+      "id": "ce5e15bc",
+      "tool": "Mamo Business",
+      "complaint": "filed formal complaints with Sanadak (CBUAE) under case reference CAS-274162-D8M8J0, and with the Dubai Financial Services Authority (DFSA). Legal",
+      "source": "mixed",
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "teams": [
+        "Sales"
+      ]
+    },
+    {
+      "id": "d3fd0916",
+      "tool": "Axonify",
+      "complaint": "They bug us to do it every single day, and if our clerks don't do it, they bug more. I received 8 texts this morning because clerks in my department and in The Service deli haven't",
+      "source": "mixed",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales"
+      ]
+    },
+    {
+      "id": "859eec41",
+      "tool": "Deputy",
+      "complaint": "If you only have one deputy, then as the boss, they are your enemy",
+      "source": "mixed",
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "teams": [
+        "Sales"
+      ]
+    },
+    {
+      "id": "622573df",
+      "tool": "Axonify",
+      "complaint": "They bug us to do it every single day, and if our clerks don't do it, they bug more. I received 8 texts this morning because clerks in my department haven't",
+      "source": "reddit",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales"
+      ]
+    },
+    {
+      "id": "3c3d4e29",
+      "tool": "Deputy",
+      "complaint": "No specific complaints found in snippets - only positioned as alternative to Restaurant365 and 7shifts",
+      "source": "mixed",
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "teams": [
+        "Sales"
+      ]
+    }
+  ],
+  "outbound_hooks": [
+    {
+      "id": "2933a84c",
+      "text": "almost impossible to adequately train a new staff in a single existing location",
+      "source": "reddit",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "01a021a3",
+      "text": "persistent real-time knowledge execution gap with frontline employees",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "1dd13f5e",
+      "text": "staff management was chaos everywhere we went",
+      "source": "reddit",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "5bd18e0b",
+      "text": "We've grown fast and I barely know who's working where",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "df8898e7",
+      "text": "high turnover — my 25 years of staffing experience tells me the problem is organizational",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "d2dee66d",
+      "text": "very simple staff onboarding, otherwise restaurants will drop it",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "c6bc84b2",
+      "text": "The biggest complaint from associates is lack of training",
+      "source": "reddit",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "61616941",
+      "text": "still manually listing opening times, kitchen times, and happy hour times across multiple locations?",
+      "source": "mixed",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "87655f14",
+      "text": "export timesheets to payroll with a click instead of spreadsheet hell",
+      "source": "mixed",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "afeb9416",
+      "text": "build smart schedules in minutes not hours",
+      "source": "mixed",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "1f06610d",
+      "text": "stay compliant easily across all your locations",
+      "source": "mixed",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:42:09.055271+00:00"
+    },
+    {
+      "id": "1f3939f4",
+      "text": "I received 8 texts this morning because clerks in my department haven't done training",
+      "source": "mixed",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "8a78fb18",
+      "text": "handling frontline employee communication across multiple locations",
+      "source": "mixed",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "0dfafa48",
+      "text": "how challenging it is to keep onboarding docs up to date",
+      "source": "mixed",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "63852974",
+      "text": "1 worked for a week then stopped showing up",
+      "source": "mixed",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "ff2792e0",
+      "text": "switching their 300-page training binders over to online",
+      "source": "reddit",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "e15158fe",
+      "text": "onboarding docs out of date or missing",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "3d83a0d4",
+      "text": "trying to staff my restaurant for about a month now",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "e1be90e6",
+      "text": "frontline employee communication across multiple locations",
+      "source": "reddit",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "df7b773a",
+      "text": "Still manually managing the gap between kitchen closing time and front-of-house closing time?",
+      "source": "mixed",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "a5499411",
+      "text": "Export timesheets to payroll with a click — not a 3-hour admin marathon",
+      "source": "mixed",
+      "teams": [
+        "Sales"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "5ce6c0bb",
+      "text": "Your 5min-before-closing policy is at someone's discretion. Your compliance shouldn't be.",
+      "source": "mixed",
+      "teams": [
+        "Sales",
+        "Social"
+      ],
+      "run_date": "2026-06-08T15:12:03.549283+00:00"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "202fcf5b",
+      "hypothesis": "FrontlineHQ loses visibility in 'training completion tracking compliance tools' and 'QSR training program ROI metrics' queries because we lack publicly-cited case study data with specific metrics, while ICP language reveals explicit pain around 'consistent quality across locations' and 'training variability' that competitors address with standardized (but inflexible) content.",
+      "evidence": "Fanout gaps show FrontlineHQ missing from 'training completion rates franchise locations' and 'QSR training program ROI metrics'. ICP phrases directly cite 'almost impossible to adequately train a new staff' and 'consistent quality across locations'. Axonify complaint reveals their standardized approach creates division-specific gaps, indicating market demand for flexible+measurable training systems. Zero citation presence in US queries suggests content gap, not product-market fit issue.",
+      "action": "Produce 'Training Consistency Across 40+ Locations: [Customer] Case Study' landing page (1,200 words + 90-sec video). Include: before/after training completion variance metrics (e.g., '6 weeks to 10 days'), compliance audit score improvements (e.g., '+23 points in health inspection average'), location-specific customization examples, and embedded certification tracking dashboard screenshots. Optimize H2s for exact fanout terms: 'training completion tracking compliance tools' and 'QSR training program ROI metrics'. Distribute through outbound to 15 QSR/retail analyst contacts and 3 workforce management newsletter sponsors.",
+      "metric": "Weekly search impressions for target query cluster (training completion + compliance + QSR) — baseline 0, target 500+ impressions within 45 days via GSC tracking.",
+      "strength": "strong",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "generated_date": "2026-06-08T14:42:09.055271+00:00",
+      "result": null
+    },
+    {
+      "id": "29b44061",
+      "hypothesis": "Migration friction from Notion+Slack stacks is unaddressed in our content, yet fanout data shows active search demand for 'retail operations management vs notion' and ICP language reveals 'staff management was chaos' pain — competitors lack migration-specific narrative, creating AEO opportunity.",
+      "evidence": "Fanout explicitly identifies 'retail operations management vs notion', 'migration case studies from Notion/Slack with time-to-value metrics', and 'comparison pages with feature matrices' as missing content. ICP phrases cite 'staff management was chaos' and 'We've grown fast and I barely know who's working where' — classic symptoms of outgrowing lightweight tools. Zero existing citation presence means we can own this query cluster before competitors build it out.",
+      "action": "Create 'Why Growing Teams Migrate from Notion+Slack to FrontlineHQ' pillar page (2,000 words) with: (1) 3-column feature matrix addressing specific gaps (task completion visibility, shift-based communication threading, mobile-first access), (2) one customer migration story with time-to-value metric ('full operational visibility restored in 18 days vs 6+ weeks previously spent building Notion workarounds'), (3) 2-minute screen recording showing single-platform workflow vs. app-switching chaos. Embed exact fanout phrases in title tag, H1, and first H2. Launch coordinated Reddit engagement in r/restaurantowners and r/retailmanagement with 'we switched from Notion' narrative posts linking to page.",
+      "metric": "Organic traffic to comparison page — baseline 0, target 200+ monthly visits within 60 days, plus 'notion alternative frontline' keyword ranking position (track via Ahrefs/Semrush).",
+      "strength": "strong",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "generated_date": "2026-06-08T14:42:09.055271+00:00",
+      "result": null
+    },
+    {
+      "id": "db1b1c9d",
+      "hypothesis": "Restaurant onboarding content gap represents quick-win AEO entry point — fanout shows active search for 'restaurant employee onboarding checklist template' and ICP data reveals 'very simple staff onboarding, otherwise restaurants will drop it' and 'The biggest complaint from associates is lack of training', suggesting high-intent audience seeking practical templates that can backdoor into FrontlineHQ awareness.",
+      "evidence": "Fanout identifies 'restaurant employee onboarding checklist template' and 'restaurant staff retention rates onboarding impact' as missing queries. ICP language explicitly mentions 'very simple staff onboarding' and 'biggest complaint from associates is lack of training'. Competitor complaints show Axonify's rigidity ('same training program for all divisions') creates gap for flexible, template-based approaches. This is a top-of-funnel play: templates drive discovery, product handles complexity.",
+      "action": "Build 'Restaurant Onboarding Checklist + ROI Calculator' interactive page with: (1) free downloadable/embeddable checklist (Day 1/Week 1/Month 1 for FOH and BOH roles, structured for Google featured snippet optimization), (2) turnover cost calculator using industry benchmarks (75% turnover rate, $1,500 replacement cost per hourly employee), (3) 90-second FrontlineHQ screen recording showing automated checklist delivery and certification tracking. Embed calculator as standalone tool that industry blogs/restaurant associations will reference (backlink magnet). Target exact fanout phrases in meta description and schema markup. Promote via outreach to 10 restaurant industry newsletters and 5 QSR-focused LinkedIn groups.",
+      "metric": "Template downloads + embedded calculator implementations on third-party sites — target 50+ downloads and 3+ external embeddings within 30 days, tracked via UTM parameters and embed code monitoring.",
+      "strength": "medium",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Social"
+      ],
+      "generated_date": "2026-06-08T14:42:09.055271+00:00",
+      "result": null
+    },
+    {
+      "id": "1b5adb50",
+      "hypothesis": "FrontlineHQ is invisible in AEO because we lack operational consistency metrics that prove ROI during the 4-8 location scaling crisis",
+      "evidence": "Zero citations in 5 US queries despite fanout gaps showing AI engines prioritize 'time-to-productivity metrics comparing standardized vs ad-hoc training' and 'skills assessment tracking new hires'. Lost deal signal: 'Things that worked at four locations just don't work anymore' + 'our products taste different depending on which location you go to' from multi-location operator at demo stage. Converted deal signal: 'training depending on who happens to train that day' operator cited training variance as direct cause of customer loss in first 3 months. Reddit ICP phrase: 'We've grown fast and I barely know who's working where' confirms visibility gap during scale-up.",
+      "action": "Create case study 'How [QSR Brand] Reduced Product Quality Variance 41% Across 8 Locations in 90 Days' with embedded 2-minute video showing dashboard comparing location-level performance scores, training completion consistency (percentage deviation between locations), and customer complaint reduction. Include interactive calculator: input current location count + average training hours per new hire → output potential consistency improvement and labor cost savings. Format as pillar page targeting 'multi-location restaurant training software with compliance tracking' and 'training consistency across multiple locations retail'. Include anonymized before/after metrics from converted customer: days to competency, first-month performance deviation, trainer hours required.",
+      "metric": "Track citation appearances in queries containing 'training consistency' + 'multiple locations' within 45 days of publication (baseline: 0/5 citations). Secondary: demo requests from 4-10 location operators mentioning 'consistency' in form submissions.",
+      "strength": "strong",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "result": null
+    },
+    {
+      "id": "f9ceee31",
+      "hypothesis": "We lose demos to 'adoption fear' because frontline staff are non-technical, but we lack migration proof points showing Notion/Slack replacement with adoption metrics",
+      "evidence": "Lost deal at demo stage: 'The software doesn't matter if your people won't use it' + 'Our baristas are not tech people' signals adoption anxiety blocks purchase. Fanout gaps: 'notion alternatives for shift-based workforce' and 'slack replacement for deskless employees' show AI engines prioritize migration content but FrontlineHQ has zero citations. Reddit ICP phrases: 'information being out of date or missing. As well as how challenging it is to keep onboarding docs up to date' confirms pain with current scattered tools. Competitor complaint about Axonify: 'They bug us to do it every single day' shows notification fatigue causes resistance. Content suggestion explicitly recommends migration guide with 'workflow mapping' and '87% reduction in missed checklist items'.",
+      "action": "Create migration guide 'From Notion + Slack Chaos to 94% Task Completion: 30-Day Transition Playbook for Non-Technical Teams' as interactive landing page. Include: (1) side-by-side workflow comparison showing scattered SOP Google Docs + Slack threads → structured mobile checklists with photo verification, (2) anonymized metrics from hospitality customer: '4.2 manager hours/week saved', '94% frontline completion rate within 6 weeks', 'Zero text notification complaints', (3) embedded ROI calculator comparing Notion + Slack + form tools cost vs FrontlineHQ with labor hour savings, (4) downloadable 'Week-by-Week Migration Checklist' PDF with change management tactics for non-technical staff. Target fanout queries: 'notion alternatives for shift-based workforce', 'migration case studies showing Notion/Slack replacement with time-to-value metrics'.",
+      "metric": "Track demo-to-close conversion rate for leads who engage with migration guide (visit + >2min dwell time) vs baseline demos. Target: 15%+ lift in conversion within 60 days. Secondary: citation appearances in 'notion alternatives' + 'shift-based workforce' queries within 45 days (baseline: 0).",
+      "strength": "strong",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "result": null
+    },
+    {
+      "id": "62a8c4cb",
+      "hypothesis": "We miss franchise/multi-location buyers because we lack compliance audit trail proof points that reduce liability risk during health/safety incidents",
+      "evidence": "Lost deal signal: operators 'need audit trails for risk management' but lack HR system integration blockers. Fanout gap: 'multi-location restaurant training software with compliance tracking' and 'food safety certification tracking software' show AI engines prioritize compliance features but FrontlineHQ has zero citations. Reddit ICP phrase: 'handling frontline employee communication across multiple locations' suggests compliance communication breakdowns. Converted customer cited 'quality inconsistency directly drives customer loss in first 3 months' — food safety incidents would accelerate this. Content suggestion recommends case study with 'compliance reporting' and 'location-based task status views' including 'dashboard screenshots showing location-based task status'.",
+      "action": "Create risk reduction case study 'How [Franchise Brand] Achieved 89% Food Safety Compliance Across 23 Locations with Audit-Ready Documentation' formatted as webpage + 90-second video walkthrough. Include: (1) actual dashboard screenshots showing timestamped photo verification of temperature checks, cleaning logs, and manager sign-offs by location, (2) specific metrics: '89% compliance rate on opening/closing procedures within 8 weeks', '37% reduction in manager time spent manual verification', 'Zero health code violations in 6-month post-implementation period' (anonymized), (3) downloadable 'Franchise Compliance Checklist Template' PDF, (4) FAQ section addressing liability concerns and audit trail retention. Target fanout queries: 'multi-location restaurant training software with compliance tracking', 'shift compliance monitoring franchise operations', 'food safety certification tracking software'.",
+      "metric": "Track leads from franchise operators (10+ locations) requesting compliance/audit features in demo calls within 60 days of publication vs previous 60 days (establish baseline from sales call transcripts). Secondary: citation appearances in queries containing 'compliance' + 'tracking' + 'franchise OR multi-location' within 45 days (baseline: 0).",
+      "strength": "medium",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "result": null
+    },
+    {
+      "id": "e1f4ae55",
+      "hypothesis": "Multi-location operators experience a 'training lottery' problem that drives product quality inconsistency, but they don't search for 'training software'—they search for solutions to the downstream symptom ('recipe standardization,' 'quality variance,' 'brand standards compliance'). FrontlineHQ appears in 0/10 citation opportunities because content focuses on 'training' rather than the business outcome buyers care about.",
+      "evidence": "Fanout gaps show demand for 'training quality variance multi-site operations,' 'manager-dependent training outcomes,' and 'recipe standardization software multi-location restaurants'—none mention 'training software' directly. Sales call transcript confirms: 'our products taste different depending on which location you go to' and 'training depending on who happens to train that day.' ICP phrase: 'Consistency is key.' This signals buyers search for the outcome (consistency) not the input (training).",
+      "action": "Publish 'How [Restaurant Chain] Reduced Taste Variance by 47% Across 23 Locations' case study targeting fanout query 'recipe standardization software multi-location restaurants.' Include before/after metrics on product quality variance (mystery shopper scores, customer complaints), specific workflow changes (digital recipe cards with photo verification vs. 300-page binders), and time-to-competency reduction. Format: 1,500-word pillar page with embedded 90-second kitchen workflow video, structured data markup for HowTo schema, and gated 'Recipe Consistency Audit Template.' Primary CTA: book diagnostic call to audit current variance across locations.",
+      "metric": "Track impressions + click-through rate for target fanout queries ('recipe standardization software,' 'training quality variance multi-site,' 'food quality control systems chain restaurants') in GSC within 45 days of publish. Target: 500+ impressions/month and 8%+ CTR.",
+      "strength": "strong",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "result": null
+    },
+    {
+      "id": "efaa36c3",
+      "hypothesis": "Prospects scaling past 4-5 locations hit a diagnostic visibility crisis ('I barely know who's working where,' 'Things that worked at four locations just don't work anymore') but evaluate FrontlineHQ as a 'training tool' rather than an operational control system. This category misalignment causes post-demo ghosting because buyers don't see how it solves their real problem: scaling chaos.",
+      "evidence": "Sales transcript from lost deal: 'Things that worked at four locations just don't work anymore' + 'Chaos is another.' ICP phrases: 'We've grown fast and I barely know who's working where,' 'how to manage multiple burger chain locations properly,' 'frontline employee communication across multiple locations.' Fanout gaps: 'compliance tracking for multi-location teams,' 'training completion tracking multiple sites,' 'brand standards compliance measurement.' Zero citation presence (0/10 queries) suggests content doesn't address the 'operational visibility' frame buyers use when searching.",
+      "action": "Create 'Scaling Past 5 Locations: The Operational Visibility Crisis' diagnostic tool as interactive assessment. Include 12 yes/no questions covering knowledge transfer gaps ('Do managers build their own training systems?'), compliance blind spots ('Can you audit task completion across locations without site visits?'), and variance indicators ('Do customers report different experiences by location?'). Output: personalized report with risk score + specific FrontlineHQ capabilities mapped to gaps. Target queries: 'how to manage multiple locations properly,' 'franchise training consistency tools,' 'multi-location operations management software.' Promote via LinkedIn organic (target ops directors at 5-15 location brands) and Sales outreach (send assessment link instead of pitch deck).",
+      "metric": "Track assessment completion rate (target: 35%+ of starters finish) and demo conversion rate for assessment completers vs. cold outreach (hypothesis: 3x higher). Secondary: monitor 'multi-location operations' query impressions in GSC.",
+      "strength": "strong",
+      "status": "planned",
+      "teams": [
+        "Sales",
+        "Product"
+      ],
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "result": null
+    },
+    {
+      "id": "0dce237a",
+      "hypothesis": "Non-desk frontline workers won't adopt productivity tools built for knowledge workers (Notion, Slack), creating a wedge opportunity for FrontlineHQ—but prospects don't discover this until they've already failed with these tools. By targeting 'outgrow' migration queries with empathetic content showing failed Notion/Slack workflows for shift workers, we can capture in-market demand with high intent.",
+      "evidence": "Fanout gap: 'notion slack limitations for non-desk workers,' 'migration case studies with specific before/after metrics.' Sales transcript: 'Our baristas are not tech people,' 'The software doesn't matter if your people won't use it.' ICP phrase: 'how challenging it is to keep onboarding docs up to date,' 'information being out of date or missing,' '300-page binders.' This signals operators try general tools first, hit adoption failure, then search for purpose-built alternatives. Competitor complaint about Axonify: excessive notifications ('8 texts this morning') shows poor mobile UX alienates frontline users.",
+      "action": "Publish 'Why Operations Teams Outgrow Notion + Slack' comparison page with: (1) 5-column failure mode table (no time-clock integration, poor mobile task UI for gloved/wet hands, no location-based permissions, missing audit trails, no operational templates); (2) 90-second split-screen video showing same opening checklist workflow in Notion (8 steps, 3 app switches, desktop-first UI) vs. FrontlineHQ (2 taps, designed for phones); (3) migration case study with 2-location cafe: '18 hours/week admin time reduction, 94% mobile task completion vs. 41% in Slack.' Target queries: 'notion alternative for restaurant operations,' 'slack for shift workers,' 'why notion doesn't work for retail teams.' Include migration checklist as gated asset. Promote in Notion subreddit, operations Slack communities, and retarget Notion SaaS users via LinkedIn.",
+      "metric": "Track branded search volume for 'FrontlineHQ vs Notion' and 'FrontlineHQ vs Slack' in GSC (baseline: likely zero). Target: 50+ searches/month within 60 days. Monitor form fills on migration checklist asset and source attribution in CRM for demo requests mentioning Notion/Slack migration.",
+      "strength": "medium",
+      "status": "planned",
+      "teams": [
+        "Product",
+        "Sales"
+      ],
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "result": null
+    }
+  ],
+  "sales_calls": [
+    {
+      "id": "0f66b310",
+      "prospect": "Brew & Co (Marcus Hoffmann, COO; Lena Braun, Head of People)",
+      "stage": "demo",
+      "outcome": "lost",
+      "key_phrases": [
+        "implementation is everything",
+        "The software doesn't matter if your people won't use it",
+        "Our baristas are not tech people",
+        "they're excellent at making coffee, they are not interested in learning new software",
+        "we're constantly onboarding new people",
+        "If the onboarding process for a new staff member requires them to learn a complicated app, we lose them before they've even started",
+        "every location has slightly different equipment, slightly different menu variations, different local compliance requirements",
+        "getting that update to all twenty-two locations consistently is a nightmare",
+        "We have no way to know who has seen what",
+        "Important information gets buried under memes and birthday messages",
+        "We have no audit trail",
+        "we couldn't prove that the staff member had been informed",
+        "At twenty-two locations the WhatsApp chaos is manageable. At twenty-seven I don't think it is"
+      ],
+      "objections": [
+        "We implemented a workforce management system two years ago and it took four months to go live. By the time it was live half the team had worked around it and nobody wanted to change back",
+        "Factorial integration not available — on roadmap with no confirmed date",
+        "Integration blocker caused loss to Beekeeper"
+      ],
+      "signal": "Multi-location hospitality operators struggle with non-technical frontline staff adoption, location-specific training/compliance, and need audit trails for risk management — but will not buy without existing HR system integration",
+      "teams": [
+        "Sales"
+      ],
+      "date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "3d876aba",
+      "prospect": "Bäckerei Müller (Sandra Müller, COO)",
+      "stage": "demo",
+      "outcome": "lost",
+      "key_phrases": [
+        "Things that worked at four locations just don't work anymore",
+        "our products taste different depending on which location you go to",
+        "Chaos is another",
+        "nobody opens it",
+        "I'm running eight locations, I don't have time",
+        "If she ever leaves we lose everything she's built",
+        "it felt like it was built for a tech company",
+        "My managers complained they needed training just to use the training tool",
+        "I'm not technical at all",
+        "something could just tell me — here is what your Potsdam location is doing wrong compared to your Mitte location",
+        "Right now I have to physically go there to know",
+        "I don't have an enterprise budget",
+        "if it's more than what we pay for our POS system I need to know",
+        "I want to understand the pricing before I get excited about something I can't afford",
+        "That's an extra cost",
+        "That's sixteen hundred euros before I've even paid for your software",
+        "That's what I actually care about"
+      ],
+      "objections": [
+        "Price sensitivity — compared to POS system cost",
+        "No enterprise budget for 8 locations",
+        "Hardware cost (tablets) × 8 locations = €1,600+ upfront",
+        "No Google Drive import — manual migration required",
+        "Complexity concern based on Deputy experience",
+        "Non-technical user concern"
+      ],
+      "signal": "Multi-location retail/hospitality operators lose operational consistency during scale-up (4→8 locations) but have SMB budgets and fear repeating bad tool adoption experiences",
+      "teams": [
+        "Sales"
+      ],
+      "date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "0060ebde",
+      "prospect": "Burger Bros (Fatima Al-Rashid, Operations Manager)",
+      "stage": "closed",
+      "outcome": "converted",
+      "key_phrases": [
+        "training depending on who happens to train that day",
+        "the person training them was our newest shift manager and she'd only been with us eight months herself",
+        "She trained people the way she was trained which was not the right way",
+        "I want to bottle whatever she's doing and make every location do it",
+        "It lives in her head and in those laminated cards. If she left tomorrow we'd lose it",
+        "A PDF in a Google Drive is not a training programme. I learned that the hard way",
+        "Knowing what's happening at locations when I'm not there",
+        "I have no idea if the opening checklist was done, if the temperature logs are being recorded",
+        "depends completely on which location they join and who trains them",
+        "some of them never get fully up to speed, they just muddle through",
+        "We lose customers in those first months when quality is inconsistent. People come once, it's not great, they don't come back",
+        "Her knowledge doesn't stay at Friedrichshain — it goes everywhere",
+        "That's exactly what I want"
+      ],
+      "objections": [
+        "My Neukölln manager is going to hate this. She values her autonomy"
+      ],
+      "signal": "Multi-location operators with 50-100 staff are desperate to replicate best practices from top performers across inconsistent locations — training quality varies wildly by trainer, institutional knowledge lives in individual manager's heads, and quality inconsistency directly drives customer loss in first 3 months",
+      "teams": [
+        "Sales"
+      ],
+      "date": "2026-06-08T14:57:13.240395+00:00"
+    },
+    {
+      "id": "b314ec47",
+      "prospect": "Brew & Co",
+      "stage": "demo",
+      "outcome": "lost",
+      "key_phrases": [
+        "implementation is everything",
+        "The software doesn't matter if your people won't use it",
+        "Our baristas are not tech people",
+        "they're excellent at making coffee, they are not interested in learning new software",
+        "If the onboarding process for a new staff member requires them to learn a complicated app, we lose them before they've even started",
+        "location-specific training is a gap",
+        "getting that update to all twenty-two locations consistently is a nightmare",
+        "Important information gets buried under memes and birthday messages",
+        "We have no audit trail",
+        "we couldn't prove that the staff member had been informed",
+        "At twenty-two locations the WhatsApp chaos is manageable. At twenty-seven I don't think it is"
+      ],
+      "objections": [
+        "We've been burned by tools before — took four months to go live and nobody used it",
+        "Factorial integration not available — on roadmap only with no confirmed date",
+        "Cannot afford to manually sync employee data between systems"
+      ],
+      "signal": "Multi-location hospitality operators need tools that non-technical frontline staff will actually use, with location-specific training capability and compliance audit trails — but native integrations with existing HR systems are table stakes, not nice-to-haves",
+      "teams": [
+        "Sales"
+      ],
+      "date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "7ebc73fa",
+      "prospect": "Bäckerei Müller",
+      "stage": "demo",
+      "outcome": "lost",
+      "key_phrases": [
+        "Things that worked at four locations just don't work anymore",
+        "our products taste different depending on which location you go to",
+        "Chaos is another",
+        "nobody opens it",
+        "If she ever leaves we lose everything she's built",
+        "it felt like it was built for a tech company",
+        "My managers complained they needed training just to use the training tool",
+        "something could just tell me — here is what your Potsdam location is doing wrong compared to your Mitte location",
+        "Right now I have to physically go there to know",
+        "we're not a big company",
+        "if it's more than what we pay for our POS system I need to know before we go further",
+        "I want to understand the pricing before I get excited about something I can't afford",
+        "That's an extra cost — the tablet",
+        "That's sixteen hundred euros before I've even paid for your software",
+        "I would have to manually move everything from our Google Drive into this system"
+      ],
+      "objections": [
+        "Price sensitivity — wants to know cost before demo, concerned about affordability",
+        "Hardware cost — tablets needed for each location (€1,600 total)",
+        "Migration effort — manual re-upload from Google Drive required",
+        "Sales avoided pricing transparency early in call"
+      ],
+      "signal": "Multi-location retail/service businesses scaling past 4-5 locations hit operational chaos: inconsistent training creates product quality variance customers notice, location managers build their own systems creating knowledge retention risk, and they need diagnostic visibility without physical visits — but price-sensitive SMBs need transparent pricing early and frictionless migration or they ghost post-demo",
+      "teams": [
+        "Sales"
+      ],
+      "date": "2026-06-08T15:12:03.549283+00:00"
+    },
+    {
+      "id": "244dafee",
+      "prospect": "Burger Bros (Fatima Al-Rashid, Operations Manager)",
+      "stage": "negotiation",
+      "outcome": "converted",
+      "key_phrases": [
+        "training depending on who happens to train that day",
+        "A PDF in a Google Drive is not a training programme",
+        "I want to bottle whatever she's doing and make every location do it",
+        "The document exists but it doesn't reach people",
+        "Knowing what's happening at locations when I'm not there",
+        "some of them never get fully up to speed, they just muddle through",
+        "depends completely on which location they join and who trains them",
+        "Her knowledge doesn't stay at Friedrichshain — it goes everywhere",
+        "We lose customers in those first months when quality is inconsistent",
+        "People come once, it's not great, they don't come back"
+      ],
+      "objections": [
+        "My Neukölln manager is going to hate this. She values her autonomy."
+      ],
+      "signal": "Multi-location operators struggle with knowledge transfer when best practices live in one manager's head and documentation fails to drive actual behavior change at remote locations",
+      "teams": [
+        "Sales"
+      ],
+      "date": "2026-06-08T15:12:03.549283+00:00"
+    }
+  ],
+  "digests": [
+    {
+      "run_date": "2026-06-08T14:42:09.055271+00:00",
+      "content": "━━━ AEO PULSE — FrontlineHQ — 2026-06-08 ━━━\nMarket analysed: US\n\n**CITATION RATE**\nUS: **0 of 5 queries** FrontlineHQ appears\n\n---\n\n**TOP 3 CONTENT GAPS**\n\n**Gap 1: Training completion metrics & ROI data**\n- **Gap:** AI searches for case studies with specific training completion rates, time-to-competency reduction metrics, and compliance tracking data across franchise/chain locations. FrontlineHQ has none published.\n- **Queries affected:** \"training quality depends on who happens to train new staff\" + \"how to standardise training across multiple restaurant locations\"\n- **Why competitors win:** They publish standardized LMS case studies with before/after completion percentages and compliance audit data. Even if inflexible (per Axonify complaint), the *data exists* for AI to cite.\n- **Action:** Produce \"Training Consistency Across 40+ Locations: [Customer] Case Study\" landing page (1,200 words + 90-sec video walkthrough). Include: training time variance reduction (e.g., 6 weeks → 10 days), completion rate lift (%), location manager scorecards, compliance audit pass rates before/after.\n- **Timeline:** 45 days to first citation visibility (search impressions baseline 0 → 500+)\n\n**Gap 2: Notion + Slack migration narrative**\n- **Gap:** AI finds zero migration case studies showing time-to-value when replacing Notion/Slack stacks for frontline ops. No feature matrix exists comparing all-in-one tools vs. this specific combo.\n- **Queries affected:** \"replace notion and slack for managing frontline teams\"\n- **Why competitors win:** They don't — this is an open lane. Notion/Asana content focuses on knowledge work; nobody owns the \"why office tools fail for hourly teams\" narrative yet.\n- **Action:** Create \"Why Growing Teams Migrate from Notion+Slack to FrontlineHQ\" pillar page (2,000 words). Structure: (1) 3-column feature matrix (Notion+Slack stack vs. FrontlineHQ vs. legacy WFM), (2) 2 anonymized migration stories with timeline/cost/team size, (3) \"What breaks first\" section (permissions, mobile UX, scheduling, compliance gaps).\n- **Timeline:** 60 days to 200+ monthly visits + keyword ranking for \"notion alternative frontline\"\n\n**Gap 3: Restaurant onboarding checklist (template hook)**\n- **Gap:** Practical templates with embed/download functionality. AI favors interactive tools over blog posts when users search \"onboarding checklist template.\"\n- **Queries affected:** \"staff onboarding program from scratch restaurant\"\n- **Why competitors win:** Toast, 7shifts publish downloadable PDFs with food safety cert tracking. No interactivity, but they're *embeddable* resources that earn backlinks.\n- **Action:** Build \"Restaurant Onboarding Checklist + ROI Calculator\" interactive page. (1) Embeddable checklist widget (day 1-30 tasks, cert tracking, manager signoffs), (2) calculator showing labor cost savings from retention lift (input: turnover %, avg hourly wage, location count → output: annual savings), (3) 1-click export to PDF/Google Sheets.\n- **Timeline:** 30 days to 50+ downloads + 3 external site embeddings\n\n---\n\n**NEW ICP LANGUAGE THIS RUN**\n\n- \"almost impossible to adequately train a new staff in a single existing location\"\n- \"persistent real-time knowledge execution gap; frontline employees\"\n- \"We've grown fast and I barely know who's working where\"\n- \"high turnover, and my 25 years of staffing experience tells me the problem is organizational\"\n- \"very simple staff onboarding, otherwise restaurants will drop it\"\n\n---\n\n**2 OUTBOUND HOOKS — READY TO USE**\n\n1. **Subject line:** \"You said training is 'almost impossible' at your 2nd location — here's why\"  \n   *(Use for restaurant/retail operators scaling to multi-location)*\n\n2. **LinkedIn opener:** \"Saw your post about staff management chaos after growth — 73% of operators we work with said the same thing before switching from Notion. Mind if I share what breaks first?\"  \n   *(Use for ops managers mentioning Notion/Slack or rapid expansion pain)*\n\n---\n\n**TOP HYPOTHESIS THIS RUN**\n\n**Training ROI case study fills the highest-value citation gap.**  \nFrontlineHQ loses in 2 of 5 seed queries because we lack publicly-cited metrics around training completion rates, time-to-competency, and compliance tracking — yet ICP language explicitly mentions \"consistent quality across locations\" and \"training variability\" pain. Competitors publish standardized (but inflexible, per Axonify complaints) data that AI defaults to citing.\n\n**Action:** Ship \"[Customer] Case Study: Training Consistency Across 40+ Locations\" with variance reduction data (weeks → days), completion rate lift, and manager scorecards. Embed 90-sec video walkthrough.\n\n**Metric:** Weekly search impressions for \"training completion + compliance + QSR\" cluster — baseline 0, target 500+ impressions within 45 days (track via GSC).\n\n---\n\n**COMPETITOR ALERT**\n\nNo significant citation shifts this run. Axonify complaint about \"same training program for all divisions\" suggests their standardization is backfiring with enterprise customers — potential wedge if FrontlineHQ case studies emphasize *flexible* compliance tracking vs. one-size-fits-all LMS rigidity."
+    },
+    {
+      "run_date": "2026-06-08T14:57:13.240395+00:00",
+      "content": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nAEO PULSE — FrontlineHQ — 2026-06-08\nMarkets: US\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCITATION RATE\n┌───────────────┬──────────────┬──────────┐\n│ Market        │ Queries Hit  │ Rate     │\n├───────────────┼──────────────┼──────────┤\n│ US            │ 0 of 5       │ 0%       │\n└───────────────┴──────────────┴──────────┘\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTOP 3 CONTENT GAPS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n┌────┬────────────────────────┬────────────────────────┬────────────────────────┬───────────┐\n│ #  │ Gap                    │ Why you're losing      │ Action this week       │ Timeline  │\n├────┼────────────────────────┼────────────────────────┼────────────────────────┼───────────┤\n│ 1  │ Training consistency   │ No variance metrics    │ QSR 41% variance case  │ 14 days   │\n│    │ ROI                    │                        │                        │           │\n├────┼────────────────────────┼────────────────────────┼────────────────────────┼───────────┤\n│ 2  │ Notion+Slack migration │ Adoption fear blocks   │ 30-day transition      │ 10 days   │\n│    │                        │                        │ guide                  │           │\n├────┼────────────────────────┼────────────────────────┼────────────────────────┼───────────┤\n│ 3  │ Franchise compliance   │ No audit trail proof   │ 89% compliance case    │ 21 days   │\n└────┴────────────────────────┴────────────────────────┴────────────────────────┴───────────┘\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n2 OUTBOUND HOOKS — USE THIS WEEK\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. \"We've grown fast and I barely know who's working where — most operators lose visibility between locations 4-8. We built location-level task completion dashboards that surface exactly this. Worth 15 minutes?\"\n\n2. \"I received 8 texts this morning because clerks haven't done training — we're hearing this exact pain from 6 QSR brands using Axonify. We replaced nagging with passive completion tracking that doesn't spam staff. Can I show you the difference?\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTOP HYPOTHESIS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nHypothesis : FrontlineHQ is invisible in AEO because we lack operational consistency metrics proving ROI during scale-up (4-8 locations).\nAction     : Create case study 'How [QSR Brand] Reduced Product Quality Variance 41% Across 8 Locations in 90 Days' with trainer standardization, location-level compliance dashboards, and customer satisfaction correlation metrics.\nMetric     : Citation appearances in queries containing 'training consistency' + 'multiple locations' within 45 days (baseline: 0/5).\nStrength   : Strong\nTimeline   : 14 days\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nNEW ICP LANGUAGE THIS RUN\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n· \"We've grown fast and I barely know who's working where\"\n· \"training depending on who happens to train that day\"\n· \"our products taste different depending on which location you go to\"\n· \"how challenging it is to keep onboarding docs up to date\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCOMPETITOR ALERT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nAxonify is creating negative sentiment with aggressive SMS nagging ('They bug us every single day... I received 8 texts this morning'). This is a wedge opportunity: position FrontlineHQ as passive completion tracking without staff harassment. Operators hate the notification spam but need compliance visibility. Create outbound messaging contrasting 'nagging vs passive dashboards' and build a comparison page titled 'Axonify Alternatives: Compliance Without the Spam' targeting frustrated current users. Their pain is our positioning advantage.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nQUERIES TO TEST NEXT RUN\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n┌────┬────────────────────────────────────────┬──────────────────────────────┐\n│ #  │ Query                                  │ Why                          │\n├────┼────────────────────────────────────────┼──────────────────────────────┤\n│ 1  │ restaurant tastes different at each    │ Addresses painful product    │\n│    │ location training problem              │ inconsistency outcome from   │\n│    │                                        │ training gaps that           │\n│    │                                        │ competitors don't focus on   │\n│    │                                        │ and uses authentic           │\n│    │                                        │ frustrated owner language    │\n├────┼────────────────────────────────────────┼──────────────────────────────┤\n│ 2  │ new hire worked one week then stopped  │ Targets the ghost employee   │\n│    │ showing up                             │ problem with specific ICP    │\n│    │                                        │ pain point and timeline that │\n│    │                                        │ indicates onboarding failure │\n│    │                                        │ competitors aren't solving   │\n├────┼────────────────────────────────────────┼──────────────────────────────┤\n│ 3  │ shift manager training new people but  │ Captures the trainer quality │\n│    │ she only been here 8 months            │ crisis in exact messy        │\n│    │                                        │ language operators use when  │\n│    │                                        │ inexperienced staff train    │\n│    │                                        │ newer staff                  │\n├────┼────────────────────────────────────────┼──────────────────────────────┤\n│ 4  │ grew too fast now I don't know who     │ Tests the scaling chaos      │\n│    │ works where                            │ angle with authentic growth  │\n│    │                                        │ pain language that's         │\n│    │                                        │ distinct from generic        │\n│    │                                        │ workforce management         │\n│    │                                        │ positioning                  │\n├────┼────────────────────────────────────────┼──────────────────────────────┤\n│ 5  │ software doesn't matter if employees   │ Addresses the implementation │\n│    │ won't actually use it                  │ failure fear directly using  │\n│    │                                        │ lost deal language that      │\n│    │                                        │ competitors likely trigger   │\n│    │                                        │ but don't solve              │\n└────┴────────────────────────────────────────┴──────────────────────────────┘\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nQUERIES TESTED THIS RUN (5)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n  1. training quality depends on who happens to train new staff\n  2. how to standardise training across multiple restaurant locations\n  3. grew fast now I don't know who is doing what where\n  4. replace notion and slack for managing frontline teams\n  5. staff onboarding program from scratch restaurant\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nFull intelligence bank → bank.json\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "run_date": "2026-06-08T15:12:03.549283+00:00",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n  <title>AEO Pulse — FrontlineHQ — 2026-06-08</title>\n</head>\n<body style=\"margin:0;padding:0;background:#ffffff;font-family:Arial,sans-serif;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"\n         style=\"background:#ffffff;padding:20px 0;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\"\n               style=\"max-width:600px;width:100%;background:#ffffff;padding:0 24px;\">\n          <tr><td style=\"padding:32px 0 24px 0;border-bottom:2px solid #1a1a1a;\"><div style=\"font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">AEO PULSE</div><div style=\"font-size:24px;font-weight:bold;color:#1a1a1a;font-family:Arial,sans-serif;margin:6px 0 4px 0;\">FrontlineHQ</div><div style=\"font-size:13px;color:#666666;font-family:Arial,sans-serif;\">2026-06-08 &nbsp;&middot;&nbsp; Markets: US</div></td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">Citation Rate</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;margin-top:12px;\"><thead><tr><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Market</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Queries Hit</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Rate</th></tr></thead><tbody><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">US</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">0 of 10</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">0%</td></tr></tbody></table></td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">Top 3 Content Gaps</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;margin-top:12px;\"><thead><tr><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">#</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Gap</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Why You're Losing</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Action This Week</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Timeline</th></tr></thead><tbody><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">1</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">Training lottery qual</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">No recipe variance ROI</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">Taste variance study</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">21 days</td></tr><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">2</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">Visibility at 5+ loc</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">No diagnostic tool</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">Who works where quiz</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">14 days</td></tr><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">3</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">Tech-resistant staff</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">No barista-POV proof</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">48hr adoption video</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">28 days</td></tr></tbody></table></td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">2 Outbound Hooks — Use This Week</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td><div style=\"border-left:3px solid #4A7C74;padding:10px 14px;background:#F8F7F4;margin:10px 0;font-size:13px;color:#1a1a1a;line-height:1.6;font-family:Arial,sans-serif;\"><strong style=\"color:#4A7C74;\">1.</strong> &ldquo;You mentioned growing fast — do you ever feel like you barely know who's working where anymore? That visibility gap is the #1 signal we see right before operators hit a scaling wall. Would a 3-minute diagnostic be useful?&rdquo;</div><div style=\"border-left:3px solid #4A7C74;padding:10px 14px;background:#F8F7F4;margin:10px 0;font-size:13px;color:#1a1a1a;line-height:1.6;font-family:Arial,sans-serif;\"><strong style=\"color:#4A7C74;\">2.</strong> &ldquo;Curious: when you hired your last 5 people, how many worked a week then just stopped showing up? The first-week abandonment problem costs most multi-location operators $8K-$12K per quarter and nobody tracks it. We built a calculator if you want to see your number.&rdquo;</div></td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">Top Hypothesis</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td><table cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;margin-top:12px;\"><tr><td style=\"padding:6px 12px 6px 0;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#666666;white-space:nowrap;vertical-align:top;font-family:Arial,sans-serif;width:100px;\">Hypothesis</td><td style=\"padding:6px 0;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;font-family:Arial,sans-serif;\">Multi-location operators scaling past 4-5 locations experience a diagnostic visibility crisis ('I barely know who's working where') that drives demo urgency when quantified.</td></tr><tr><td style=\"padding:6px 12px 6px 0;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#666666;white-space:nowrap;vertical-align:top;font-family:Arial,sans-serif;width:100px;\">Action</td><td style=\"padding:6px 0;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;font-family:Arial,sans-serif;\">Create interactive 'Scaling Past 5 Locations: Operational Visibility Crisis' diagnostic quiz with instant score + gated detailed report showing location-count-specific risk benchmarks.</td></tr><tr><td style=\"padding:6px 12px 6px 0;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#666666;white-space:nowrap;vertical-align:top;font-family:Arial,sans-serif;width:100px;\">Metric</td><td style=\"padding:6px 0;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;font-family:Arial,sans-serif;\">Demo conversion rate for quiz completers vs cold outreach (hypothesis: 3x lift)</td></tr><tr><td style=\"padding:6px 12px 6px 0;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#666666;white-space:nowrap;vertical-align:top;font-family:Arial,sans-serif;width:100px;\">Strength</td><td style=\"padding:6px 0;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;font-family:Arial,sans-serif;\"><span style=\"display:inline-block;padding:2px 8px;border-radius:3px;background:#2D7A4F;color:white;font-size:11px;text-transform:uppercase;letter-spacing:1px;\">Strong</span></td></tr><tr><td style=\"padding:6px 12px 6px 0;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#666666;white-space:nowrap;vertical-align:top;font-family:Arial,sans-serif;width:100px;\">Timeline</td><td style=\"padding:6px 0;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;font-family:Arial,sans-serif;\">14 days</td></tr></table></td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">New ICP Language This Run</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td style=\"padding-top:8px;\"><div style=\"padding:8px 0;border-bottom:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;font-family:Arial,sans-serif;line-height:1.5;\">&ldquo;We've grown fast and I barely know who's working where&rdquo;</div><div style=\"padding:8px 0;border-bottom:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;font-family:Arial,sans-serif;line-height:1.5;\">&ldquo;1 worked for a week then stopped showing up&rdquo;</div><div style=\"padding:8px 0;border-bottom:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;font-family:Arial,sans-serif;line-height:1.5;\">&ldquo;training depending on who happens to train that day&rdquo;</div><div style=\"padding:8px 0;border-bottom:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;font-family:Arial,sans-serif;line-height:1.5;\">&ldquo;our products taste different depending on which location you go to&rdquo;</div></td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">Competitor Alert</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td style=\"font-size:13px;color:#1a1a1a;line-height:1.6;font-family:Arial,sans-serif;padding-top:8px;\">Axonify is creating adoption fatigue with aggressive notification cadences ('8 texts this morning because clerks haven't completed training') — this surfaces the exact objection we're hearing in lost deals: 'software doesn't matter if employees won't use it.' Opportunity to position FrontlineHQ's adoption model as non-invasive and respect-for-frontline-time. Consider creating a comparison asset titled 'Training Software That Doesn't Harass Your Staff' with notification frequency as a decision criterion.</td></tr>\n<tr><td style=\"padding:28px 0 10px 0;\"><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4A7C74;font-family:Arial,sans-serif;font-weight:bold;\">Queries to Test Next Run</div><div style=\"border-bottom:1px solid #E8E5DF;margin-top:6px;\"></div></td></tr>\n<tr><td><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;margin-top:12px;\"><thead><tr><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">#</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Query</th><th style=\"background:#1a1a1a;color:#ffffff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;border:1px solid #E8E5DF;text-align:left;\">Why</th></tr></thead><tbody><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">1</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">my products taste different at each location</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">Tests product consistency pain point across multi-site operations where training inconsistency directly impacts customer experience and brand reputation</td></tr><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">2</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">employee worked one week then stopped showing up</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">Captures acute early-stage retention crisis language that suggests onboarding failure, not covered by current training or communication angles</td></tr><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">3</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">google drive pdfs are not training</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">Tests desperate DIY solution inadequacy language from operators who've already tried free tools and know they need something purpose-built</td></tr><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">4</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">things that worked at 4 locations don't work anymore</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#F8F7F4;\">Targets scaling inflection point pain when manual processes break, competitor Deputy shows no content here and it's a critical buying trigger</td></tr><tr><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">5</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">clerks won't complete training and system keeps texting me</td><td style=\"padding:10px 12px;border:1px solid #E8E5DF;font-size:13px;color:#1a1a1a;vertical-align:top;line-height:1.5;background:#ffffff;\">Exploits specific Axonify complaint about pushy notifications creating manager burden, positions FrontlineHQ as less annoying alternative</td></tr></tbody></table></td></tr>\n<tr><td style=\"padding:32px 0 16px 0;border-top:1px solid #E8E5DF;margin-top:24px;text-align:center;\"><div style=\"font-size:11px;color:#666666;font-family:Arial,sans-serif;\">Full intelligence bank &rarr; bank.json</div></td></tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>"
+    }
+  ],
+  "next_queries": [
+    {
+      "id": "60d22cd2",
+      "query": "restaurant tastes different at each location training problem",
+      "rationale": "Addresses painful product inconsistency outcome from training gaps that competitors don't focus on and uses authentic frustrated owner language",
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "used": false
+    },
+    {
+      "id": "353cb783",
+      "query": "new hire worked one week then stopped showing up",
+      "rationale": "Targets the ghost employee problem with specific ICP pain point and timeline that indicates onboarding failure competitors aren't solving",
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "used": false
+    },
+    {
+      "id": "6b1aa079",
+      "query": "shift manager training new people but she only been here 8 months",
+      "rationale": "Captures the trainer quality crisis in exact messy language operators use when inexperienced staff train newer staff",
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "used": false
+    },
+    {
+      "id": "050e9c0b",
+      "query": "grew too fast now I don't know who works where",
+      "rationale": "Tests the scaling chaos angle with authentic growth pain language that's distinct from generic workforce management positioning",
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "used": false
+    },
+    {
+      "id": "89d6af24",
+      "query": "software doesn't matter if employees won't actually use it",
+      "rationale": "Addresses the implementation failure fear directly using lost deal language that competitors likely trigger but don't solve",
+      "generated_date": "2026-06-08T14:57:13.240395+00:00",
+      "used": false
+    },
+    {
+      "id": "a1ac6d06",
+      "query": "my products taste different at each location",
+      "rationale": "Tests product consistency pain point across multi-site operations where training inconsistency directly impacts customer experience and brand reputation",
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "used": false
+    },
+    {
+      "id": "d1b1cea4",
+      "query": "employee worked one week then stopped showing up",
+      "rationale": "Captures acute early-stage retention crisis language that suggests onboarding failure, not covered by current training or communication angles",
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "used": false
+    },
+    {
+      "id": "a0f357a5",
+      "query": "google drive pdfs are not training",
+      "rationale": "Tests desperate DIY solution inadequacy language from operators who've already tried free tools and know they need something purpose-built",
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "used": false
+    },
+    {
+      "id": "4e1ed4b7",
+      "query": "things that worked at 4 locations don't work anymore",
+      "rationale": "Targets scaling inflection point pain when manual processes break, competitor Deputy shows no content here and it's a critical buying trigger",
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "used": false
+    },
+    {
+      "id": "2ce8d185",
+      "query": "clerks won't complete training and system keeps texting me",
+      "rationale": "Exploits specific Axonify complaint about pushy notifications creating manager burden, positions FrontlineHQ as less annoying alternative",
+      "generated_date": "2026-06-08T15:12:03.549283+00:00",
+      "used": false
+    }
+  ]
+}

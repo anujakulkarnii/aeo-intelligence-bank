@@ -1,0 +1,7 @@
+anthropic
+requests
+python-dotenv
+beautifulsoup4
+resend
+flask
+gunicorn

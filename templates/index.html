@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEO Intelligence Bank — FrontlineHQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div id="logo">
+      <span class="logo-mark">AEO</span>
+      <span class="logo-company">FrontlineHQ</span>
+    </div>
+    <nav id="sidenav">
+      <a class="nav-item active" data-section="overview">Overview</a>
+      <a class="nav-item" data-section="icp_phrases">ICP Phrases</a>
+      <a class="nav-item" data-section="fanout_terms">Fanout Terms</a>
+      <a class="nav-item" data-section="citations">Citations</a>
+      <a class="nav-item" data-section="content_gaps">Content Gaps</a>
+      <a class="nav-item" data-section="outbound_hooks">Outbound Hooks</a>
+      <a class="nav-item" data-section="hypotheses">Hypotheses</a>
+      <a class="nav-item" data-section="sales_calls">Sales Calls</a>
+    </nav>
+    <div class="sidebar-footer" id="run-count-label">—</div>
+  </aside>
+
+  <!-- Main -->
+  <div id="main-wrap">
+
+    <!-- Top bar -->
+    <header id="topbar">
+      <div id="topbar-left">
+        <h1 id="section-title">Overview</h1>
+        <span class="run-badge" id="last-run-badge">Loading…</span>
+      </div>
+      <div id="topbar-right">
+        <div class="metric-chip">
+          <span class="metric-label">Visibility</span>
+          <span class="metric-value" id="val-visibility">—</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-label">Gaps</span>
+          <span class="metric-value" id="val-gaps">—</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-label">Hypotheses</span>
+          <span class="metric-value" id="val-hyp">—</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filter bar -->
+    <div id="filter-bar">
+      <div id="filter-pills">
+        <button class="pill active" data-filter="all">All teams</button>
+        <button class="pill" data-filter="Sales">Sales</button>
+        <button class="pill" data-filter="Social">Social</button>
+        <button class="pill" data-filter="Product">Product</button>
+        <button class="pill" data-filter="7d">Last 7 days</button>
+      </div>
+      <div id="search-wrap">
+        <input type="text" id="search-input" placeholder="Search…" autocomplete="off">
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main id="content">
+      <div class="loading-state">Loading intelligence bank…</div>
+    </main>
+
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+let D = {};  // full bank.json
+let section = 'overview';
+let teamFilter = 'all';
+let dateFilter = false; // true = last 7 days
+let searchQuery = '';
+let searchTimer = null;
+
+// ── Init ───────────────────────────────────────────────────────────────────
+fetch('/api/data')
+  .then(r => r.json())
+  .then(data => {
+    D = data;
+    updateTopBar();
+    renderSection();
+  })
+  .catch(() => {
+    document.getElementById('content').innerHTML =
+      '<div class="loading-state">Could not load bank.json. Run the pipeline first.</div>';
+  });
+
+// ── Navigation ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    section = el.dataset.section;
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+    updateTopBar();
+    renderSection();
+  });
+});
+
+// ── Filters ────────────────────────────────────────────────────────────────
+document.querySelectorAll('.pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (btn.dataset.filter === '7d') {
+      teamFilter = 'all';
+      dateFilter = true;
+    } else {
+      teamFilter = btn.dataset.filter;
+      dateFilter = false;
+    }
+    renderSection();
+  });
+});
+
+// ── Search (debounced) ─────────────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    renderSection();
+  }, 180);
+});
+
+// ── Top bar update ─────────────────────────────────────────────────────────
+function updateTopBar() {
+  const sectionNames = {
+    overview:      'Overview',
+    icp_phrases:   'ICP Phrases',
+    fanout_terms:  'Fanout Terms',
+    citations:     'Citations',
+    content_gaps:  'Content Gaps',
+    outbound_hooks:'Outbound Hooks',
+    hypotheses:    'Hypotheses',
+    sales_calls:   'Sales Calls',
+  };
+  document.getElementById('section-title').textContent = sectionNames[section] || section;
+
+  const meta = D.meta || {};
+  const lastRun = meta.last_run ? meta.last_run.slice(0,10) : '—';
+  document.getElementById('last-run-badge').textContent = 'Last run: ' + lastRun;
+  document.getElementById('run-count-label').textContent = 'Run ' + (meta.run_count || 0);
+
+  // Citation rate (Google Tavily US)
+  const usCits = (D.citations || []).filter(c => c.market === 'US');
+  const usHits = usCits.filter(c => c.frontlinehq_appears).length;
+  const rate = usCits.length ? Math.round(usHits / usCits.length * 100) : 0;
+  document.getElementById('val-visibility').textContent = rate + '%';
+
+  document.getElementById('val-gaps').textContent = (D.next_queries || []).length;
+  document.getElementById('val-hyp').textContent   = (D.hypotheses  || []).length;
+}
+
+// ── Main dispatcher ────────────────────────────────────────────────────────
+function renderSection() {
+  const el = document.getElementById('content');
+  const fn = {
+    overview:       renderOverview,
+    icp_phrases:    renderIcpPhrases,
+    fanout_terms:   renderFanoutTerms,
+    citations:      renderCitations,
+    content_gaps:   renderContentGaps,
+    outbound_hooks: renderOutboundHooks,
+    hypotheses:     renderHypotheses,
+    sales_calls:    renderSalesCalls,
+  }[section];
+  el.innerHTML = fn ? fn() : '<div class="empty-state">Section not found.</div>';
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  return iso.slice(0,10);
+}
+
+function dayDiff(iso) {
+  if (!iso) return 999;
+  return (Date.now() - new Date(iso).getTime()) / 86400000;
+}
+
+function applyFilters(items, textFields) {
+  let out = items || [];
+
+  // Date filter
+  if (dateFilter) {
+    out = out.filter(i => dayDiff(i.run_date || i.date || i.generated_date) <= 7);
+  }
+
+  // Team filter
+  if (teamFilter !== 'all') {
+    out = out.filter(i => {
+      const t = i.teams || i.team || [];
+      return Array.isArray(t) ? t.includes(teamFilter) : t === teamFilter;
+    });
+  }
+
+  // Search
+  if (searchQuery) {
+    out = out.filter(i => {
+      return textFields.some(f => (i[f]||'').toLowerCase().includes(searchQuery));
+    });
+  }
+
+  return out;
+}
+
+function renderTags(item) {
+  const tags = [];
+  if (item.geography && item.geography !== 'Unknown')
+    tags.push(`<span class="tag geo">${esc(item.geography)}</span>`);
+  if (item.market)
+    tags.push(`<span class="tag geo">${esc(item.market)}</span>`);
+  if (item.model)
+    tags.push(`<span class="tag model">${esc(item.model)}</span>`);
+  const src = item.source || item.source_file;
+  if (src) tags.push(`<span class="tag source">${esc(src)}</span>`);
+  const teams = item.teams || [];
+  teams.forEach(t => tags.push(`<span class="tag team">${esc(t)}</span>`));
+  const dt = item.run_date || item.date || item.generated_date;
+  if (dt) tags.push(`<span class="tag date">${esc(fmtDate(dt))}</span>`);
+  return tags.join('');
+}
+
+function tickCell(val) {
+  if (val === true)  return '<span class="tick">✓</span>';
+  if (val === false) return '<span class="cross">✗</span>';
+  return '<span class="dash">—</span>';
+}
+
+// ── OVERVIEW ───────────────────────────────────────────────────────────────
+function renderOverview() {
+  return [
+    renderStatBlocks(),
+    '<div class="two-col">',
+      renderCompetitorTable(),
+      renderSourceDomains(),
+    '</div>',
+    renderCitationGrid(),
+    '<div class="two-col">',
+      renderLatestPhrases(),
+      renderLatestHooks(),
+    '</div>',
+    renderHypothesesOverview(),
+  ].join('');
+}
+
+function renderStatBlocks() {
+  const usCits  = (D.citations||[]).filter(c => c.market === 'US');
+  const usHits  = usCits.filter(c => c.frontlinehq_appears).length;
+  const rate    = usCits.length ? Math.round(usHits/usCits.length*100) : 0;
+  const rateClass = rate > 30 ? 'up' : rate > 0 ? '' : 'down';
+
+  return `
+  <div class="stat-row">
+    <div class="stat-block">
+      <div class="stat-label">US Citation Rate</div>
+      <div class="stat-value ${rateClass}">${rate}%</div>
+      <div class="stat-sub">${usHits} of ${usCits.length} queries</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">ICP Phrases Banked</div>
+      <div class="stat-value">${(D.icp_phrases||[]).length}</div>
+      <div class="stat-sub">${(D.sales_calls||[]).length} from sales calls</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">Active Hypotheses</div>
+      <div class="stat-value">${(D.hypotheses||[]).length}</div>
+      <div class="stat-sub">${(D.hypotheses||[]).filter(h=>h.strength==='strong').length} strong signal</div>
+    </div>
+  </div>`;
+}
+
+function renderCompetitorTable() {
+  const freq = {};
+  (D.citations||[]).forEach(c => {
+    (c.competitors_cited||[]).forEach(comp => {
+      freq[comp] = (freq[comp]||0) + 1;
+    });
+  });
+  // Also from ai_citations
+  (D.ai_citations||[]).forEach(c => {
+    (c.competitors_cited||[]).forEach(comp => {
+      freq[comp] = (freq[comp]||0) + 1;
+    });
+  });
+
+  const sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max = sorted[0] ? sorted[0][1] : 1;
+
+  if (!sorted.length) return `
+  <div class="section-block">
+    <div class="section-head">Competitor Visibility</div>
+    <div class="no-results">No competitor data yet.</div>
+  </div>`;
+
+  const rows = sorted.map(([comp, n], i) => {
+    const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'';
+    const pct = Math.round(n/max*100);
+    return `<tr>
+      <td><span class="rank ${rankClass}">${i+1}</span></td>
+      <td>${esc(comp)}</td>
+      <td>
+        <div class="comp-bar-wrap">
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:${pct}%"></div></div>
+          <span class="comp-count">${n}</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  return `
+  <div class="section-block">
+    <div class="section-head">Competitor Citations</div>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Competitor</th><th>Appearances</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+function renderSourceDomains() {
+  // Derive source type breakdown from various bank entries
+  const counts = { reddit: 0, review_site: 0, search: 0, sales_call: 0 };
+  (D.icp_phrases||[]).forEach(p => { const s = p.source||'search'; counts[s] = (counts[s]||0)+1; });
+  (D.outbound_hooks||[]).forEach(h => { const s = h.source||'search'; counts[s] = (counts[s]||0)+1; });
+  (D.competitor_complaints||[]).forEach(c => { const s = c.source||'search'; counts[s]=(counts[s]||0)+1; });
+
+  const total = Object.values(counts).reduce((a,b)=>a+b,0) || 1;
+
+  const typeMap = {
+    reddit:      { label: 'Reddit', badge: 'ugc',       type: 'UGC' },
+    review_site: { label: 'G2 / Capterra', badge: 'editorial', type: 'Editorial' },
+    search:      { label: 'Search results', badge: 'corporate', type: 'Corporate' },
+    sales_call:  { label: 'Sales calls', badge: 'ugc',       type: 'UGC' },
+  };
+
+  const rows = Object.entries(counts)
+    .filter(([,n]) => n > 0)
+    .sort((a,b)=>b[1]-a[1])
+    .map(([src, n]) => {
+      const info = typeMap[src] || { label: src, badge: 'corporate', type: 'Other' };
+      const pct  = Math.round(n/total*100);
+      return `<div class="source-row">
+        <span class="source-name">${esc(info.label)}</span>
+        <div class="source-right">
+          <span class="source-pct">${pct}%</span>
+          <span class="type-badge ${info.badge}">${info.type}</span>
+        </div>
+      </div>`;
+    }).join('');
+
+  return `
+  <div class="section-block">
+    <div class="section-head">Source Breakdown</div>
+    <div class="source-list">${rows || '<div class="no-results">No data.</div>'}</div>
+  </div>`;
+}
+
+function renderCitationGrid() {
+  // Build grid: query → {google, perplexity, claude}
+  const grid = {};
+
+  // Google/Tavily — use most recent per query
+  const citsByQuery = {};
+  (D.citations||[]).forEach(c => {
+    if (c.market !== 'US') return;
+    const k = c.query;
+    if (!citsByQuery[k] || c.run_date > citsByQuery[k].run_date) citsByQuery[k] = c;
+  });
+  Object.entries(citsByQuery).forEach(([q, c]) => {
+    if (!grid[q]) grid[q] = {google:null, perplexity:null, claude:null};
+    grid[q].google = c.frontlinehq_appears;
+  });
+
+  // AI citations — most recent per query×model
+  const aiByKey = {};
+  (D.ai_citations||[]).forEach(c => {
+    const k = c.query + '|' + c.model;
+    if (!aiByKey[k] || (c.run_date||c.date) > (aiByKey[k].run_date||aiByKey[k].date)) aiByKey[k] = c;
+  });
+  Object.values(aiByKey).forEach(c => {
+    if (!grid[c.query]) grid[c.query] = {google:null, perplexity:null, claude:null};
+    if (c.model === 'perplexity-sonar') grid[c.query].perplexity = c.frontlinehq_appears;
+    if (c.model === 'claude-web')       grid[c.query].claude     = c.frontlinehq_appears;
+  });
+
+  const entries = Object.entries(grid);
+  if (!entries.length) return `
+  <div class="section-block">
+    <div class="section-head">Citation Tracker — Engine Coverage</div>
+    <div class="no-results">No citation data yet.</div>
+  </div>`;
+
+  const rows = entries.map(([q, vals]) => `
+    <tr>
+      <td>${esc(q)}</td>
+      <td>${tickCell(vals.google)}</td>
+      <td>${tickCell(vals.perplexity)}</td>
+      <td>${tickCell(vals.claude)}</td>
+    </tr>`).join('');
+
+  return `
+  <div class="section-block">
+    <div class="section-head">Citation Tracker — Engine Coverage</div>
+    <table class="data-table grid-table">
+      <thead>
+        <tr>
+          <th>Query</th>
+          <th>Google</th>
+          <th>Perplexity</th>
+          <th>Claude</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+function renderLatestPhrases() {
+  const phrases = [...(D.icp_phrases||[])]
+    .sort((a,b) => (b.run_date||'') > (a.run_date||'') ? 1 : -1)
+    .slice(0, 3);
+
+  if (!phrases.length) return `
+  <div class="section-block">
+    <div class="section-head">Latest ICP Language</div>
+    <div class="no-results">No phrases yet.</div>
+  </div>`;
+
+  const items = phrases.map(p => `
+    <div class="phrase-item">
+      <div class="phrase-text">${esc(p.text)}</div>
+      <div class="tag-row">${renderTags(p)}</div>
+    </div>`).join('');
+
+  return `
+  <div class="section-block">
+    <div class="section-head">Latest ICP Language</div>
+    <div class="phrase-list">${items}</div>
+  </div>`;
+}
+
+function renderLatestHooks() {
+  const hooks = [...(D.outbound_hooks||[])]
+    .sort((a,b) => (b.run_date||'') > (a.run_date||'') ? 1 : -1)
+    .slice(0, 2);
+
+  if (!hooks.length) return `
+  <div class="section-block">
+    <div class="section-head">Outbound Hooks</div>
+    <div class="no-results">No hooks yet.</div>
+  </div>`;
+
+  const items = hooks.map(h => `
+    <div class="hook-item">
+      <div class="hook-text">${esc(h.text)}</div>
+      <div class="tag-row">${renderTags(h)}</div>
+    </div>`).join('');
+
+  return `
+  <div class="section-block">
+    <div class="section-head">Outbound Hooks</div>
+    <div class="hook-list">${items}</div>
+  </div>`;
+}
+
+function renderHypothesesOverview() {
+  const hyps = D.hypotheses || [];
+  if (!hyps.length) return '';
+
+  const items = hyps.map(h => {
+    const s = (h.strength||'weak').toLowerCase();
+    return `
+    <div class="hyp-item">
+      <div class="hyp-top">
+        <div class="hyp-text">${esc(h.hypothesis)}</div>
+        <span class="strength-badge ${s}">${esc(h.strength||'weak')}</span>
+      </div>
+      <div class="hyp-action"><strong>Action:</strong> ${esc(h.action)}</div>
+      <div class="tag-row">
+        <span class="status-badge">${esc(h.status||'planned')}</span>
+        ${(h.teams||[]).map(t=>`<span class="tag team">${esc(t)}</span>`).join('')}
+        ${h.generated_date?`<span class="tag date">${esc(fmtDate(h.generated_date))}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+  <div class="section-block">
+    <div class="section-head">All Hypotheses</div>
+    <div class="hyp-list">${items}</div>
+  </div>`;
+}
+
+// ── ICP PHRASES ────────────────────────────────────────────────────────────
+function renderIcpPhrases() {
+  const items = applyFilters(D.icp_phrases||[], ['text', 'source', 'geography']);
+
+  if (!items.length) return '<div class="no-results">No ICP phrases match the current filters.</div>';
+
+  const html = items.map(p => `
+    <div class="phrase-item">
+      <div class="phrase-text">${esc(p.text)}</div>
+      <div class="tag-row">${renderTags(p)}</div>
+    </div>`).join('');
+
+  return `<div class="phrase-list">${html}</div>`;
+}
+
+// ── FANOUT TERMS ───────────────────────────────────────────────────────────
+function renderFanoutTerms() {
+  const items = applyFilters(D.fanout_terms||[], ['term', 'query']);
+
+  if (!items.length) return '<div class="no-results">No fanout terms match the current filters.</div>';
+
+  const html = items.map(f => `
+    <div class="item-row">
+      <div class="item-text">${esc(f.term)}</div>
+      <div class="item-sub">Query: ${esc(f.query)}</div>
+      <div class="tag-row">${renderTags(f)}</div>
+    </div>`).join('');
+
+  return `<div class="item-list">${html}</div>`;
+}
+
+// ── CITATIONS ──────────────────────────────────────────────────────────────
+function renderCitations() {
+  // Combine Google citations and AI citations
+  const googleCits = applyFilters(D.citations||[], ['query', 'market', 'gap_analysis'])
+    .map(c => ({ ...c, _engine: 'Google (Tavily)', _model: c.market }));
+
+  const aiCits = applyFilters(D.ai_citations||[], ['query', 'model', 'response_preview'])
+    .map(c => ({ ...c, _engine: c.model, _model: c.model }));
+
+  const all = [...googleCits, ...aiCits];
+
+  if (!all.length) return '<div class="no-results">No citations match the current filters.</div>';
+
+  const rows = all.map(c => {
+    const tick = c.frontlinehq_appears
+      ? '<span class="tick">✓ Present</span>'
+      : '<span class="cross">✗ Absent</span>';
+    const comps = (c.competitors_cited||[]).join(', ') || '—';
+    return `<tr>
+      <td>${esc(c.query)}</td>
+      <td><span class="tag model">${esc(c._engine)}</span></td>
+      <td>${tick}</td>
+      <td>${esc(comps)}</td>
+      <td>${esc(fmtDate(c.run_date||c.date))}</td>
+    </tr>`;
+  }).join('');
+
+  return `<table class="data-table">
+    <thead><tr>
+      <th>Query</th>
+      <th>Engine</th>
+      <th>FrontlineHQ</th>
+      <th>Competitors Cited</th>
+      <th>Date</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+// ── CONTENT GAPS ───────────────────────────────────────────────────────────
+function renderContentGaps() {
+  const items = applyFilters(D.next_queries||[], ['query', 'rationale']);
+
+  if (!items.length) return '<div class="no-results">No content gaps recorded yet.</div>';
+
+  const html = items.map(nq => `
+    <div class="item-row">
+      <div class="item-text">${esc(nq.query)}</div>
+      <div class="item-sub">${esc(nq.rationale)}</div>
+      <div class="tag-row">
+        ${nq.used ? '<span class="tag source">Used</span>' : '<span class="tag team">Pending</span>'}
+        ${nq.generated_date ? `<span class="tag date">${esc(fmtDate(nq.generated_date))}</span>` : ''}
+      </div>
+    </div>`).join('');
+
+  return `<div class="item-list">${html}</div>`;
+}
+
+// ── OUTBOUND HOOKS ─────────────────────────────────────────────────────────
+function renderOutboundHooks() {
+  const items = applyFilters(D.outbound_hooks||[], ['text', 'source']);
+
+  if (!items.length) return '<div class="no-results">No outbound hooks match the current filters.</div>';
+
+  const html = items.map(h => `
+    <div class="phrase-item">
+      <div class="phrase-text" style="font-style:normal">${esc(h.text)}</div>
+      <div class="tag-row">${renderTags(h)}</div>
+    </div>`).join('');
+
+  return `<div class="phrase-list">${html}</div>`;
+}
+
+// ── HYPOTHESES ─────────────────────────────────────────────────────────────
+function renderHypotheses() {
+  const items = applyFilters(D.hypotheses||[], ['hypothesis', 'action', 'evidence', 'metric']);
+
+  if (!items.length) return '<div class="no-results">No hypotheses match the current filters.</div>';
+
+  const html = items.map(h => {
+    const s = (h.strength||'weak').toLowerCase();
+    return `
+    <div class="hyp-item">
+      <div class="hyp-top">
+        <div class="hyp-text">${esc(h.hypothesis)}</div>
+        <span class="strength-badge ${s}">${esc(h.strength||'weak')}</span>
+      </div>
+      ${h.evidence ? `<div class="hyp-action"><strong>Evidence:</strong> ${esc(h.evidence)}</div>` : ''}
+      <div class="hyp-action"><strong>Action:</strong> ${esc(h.action)}</div>
+      <div class="hyp-action"><strong>Metric:</strong> ${esc(h.metric)}</div>
+      <div class="tag-row">
+        <span class="status-badge">${esc(h.status||'planned')}</span>
+        ${(h.teams||[]).map(t=>`<span class="tag team">${esc(t)}</span>`).join('')}
+        ${h.generated_date?`<span class="tag date">${esc(fmtDate(h.generated_date))}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="hyp-list">${html}</div>`;
+}
+
+// ── SALES CALLS ────────────────────────────────────────────────────────────
+function renderSalesCalls() {
+  const items = applyFilters(D.sales_calls||[], ['signal', 'prospect', 'outcome', 'stage']);
+
+  if (!items.length) return '<div class="no-results">No sales calls match the current filters.</div>';
+
+  const html = items.map(call => {
+    const outcomeColor = call.outcome === 'converted' ? '#0F6E56' : call.outcome === 'lost' ? '#D85A30' : '#6B6860';
+    const phrases = (call.key_phrases||[]).slice(0,3);
+    return `
+    <div class="hyp-item">
+      <div class="hyp-top">
+        <div class="hyp-text">${esc(call.prospect||'Unknown')} — ${esc(call.stage||'?')}</div>
+        <span class="strength-badge" style="background:#F3F3F2;color:${outcomeColor};">${esc(call.outcome||'unknown')}</span>
+      </div>
+      ${call.signal ? `<div class="hyp-action">${esc(call.signal)}</div>` : ''}
+      ${phrases.length ? `<div class="tag-row" style="flex-direction:column;align-items:flex-start;gap:3px;">
+        ${phrases.map(p=>`<div style="font-size:12px;color:#6B6860;">"${esc(p)}"</div>`).join('')}
+      </div>` : ''}
+      <div class="tag-row">
+        ${(call.objections||[]).map(o=>`<span class="tag source">${esc(o.slice(0,40))}</span>`).join('')}
+        ${call.date?`<span class="tag date">${esc(fmtDate(call.date))}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="hyp-list">${html}</div>`;
+}
+</script>
+</body>
+</html>
