@@ -49,23 +49,25 @@ body {
   border-bottom: 1px solid var(--border-light);
 }
 
-.logo-mark {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
 .logo-company {
   display: block;
-  font-family: var(--font-head);
-  font-size: 13px;
-  font-weight: 600;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text-pri);
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+.logo-mark {
+  display: block;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: var(--accent);
   margin-top: 3px;
+  line-height: 1.4;
 }
 
 #sidenav {
