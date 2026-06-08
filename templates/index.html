@@ -317,28 +317,25 @@ function renderCompetitorTable() {
     <div class="no-results">No competitor data yet.</div>
   </div>`;
 
-  const rows = sorted.map(([comp, n], i) => {
-    const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'';
-    const pct = Math.round(n/max*100);
-    return `<tr>
-      <td><span class="rank ${rankClass}">${i+1}</span></td>
-      <td>${esc(comp)}</td>
-      <td>
-        <div class="comp-bar-wrap">
-          <div class="comp-bar"><div class="comp-bar-fill" style="width:${pct}%"></div></div>
-          <span class="comp-count">${n}</span>
-        </div>
-      </td>
-    </tr>`;
+  const bars = sorted.map(([comp, n], i) => {
+    const pct = Math.round(n / max * 100);
+    const isTop = i === 0;
+    return `
+    <div class="bar-row">
+      <div class="bar-meta">
+        <span class="bar-label">${esc(comp)}</span>
+        <span class="bar-value">${n}</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill ${isTop ? 'accent' : ''}" style="width:${pct}%"></div>
+      </div>
+    </div>`;
   }).join('');
 
   return `
   <div class="section-block">
     <div class="section-head">Competitor Citations</div>
-    <table class="data-table">
-      <thead><tr><th>#</th><th>Competitor</th><th>Appearances</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
+    <div class="bar-chart">${bars}</div>
   </div>`;
 }
 
@@ -369,17 +366,22 @@ function renderSourceDomains() {
     sales_call:  { label: 'Sales transcripts',   badge: 'ugc',       type: 'Primary' },
   };
 
-  const rows = Object.entries(buckets)
+  const maxSrc = Math.max(...Object.values(buckets).filter(n => n > 0), 1);
+  const bars = Object.entries(buckets)
     .filter(([,n]) => n > 0)
-    .sort((a,b)=>b[1]-a[1])
-    .map(([src, n]) => {
+    .sort((a,b) => b[1]-a[1])
+    .map(([src, n], i) => {
       const info = typeMap[src];
-      const pct  = Math.round(n/total*100);
-      return `<div class="source-row">
-        <span class="source-name">${esc(info.label)}</span>
-        <div class="source-right">
-          <span class="source-pct">${pct}%</span>
-          <span class="type-badge ${info.badge}">${info.type}</span>
+      const pct  = Math.round(n / total * 100);
+      const barW = Math.round(n / maxSrc * 100);
+      return `
+      <div class="bar-row">
+        <div class="bar-meta">
+          <span class="bar-label">${esc(info.label)}</span>
+          <span class="bar-value">${pct}%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill ${i === 0 ? 'accent' : ''}" style="width:${barW}%"></div>
         </div>
       </div>`;
     }).join('');
@@ -387,7 +389,7 @@ function renderSourceDomains() {
   return `
   <div class="section-block">
     <div class="section-head">Source Breakdown</div>
-    <div class="source-list">${rows || '<div class="no-results">No data.</div>'}</div>
+    <div class="bar-chart">${bars || '<div style="padding:16px;color:var(--text-muted);font-size:12.5px;">No data.</div>'}</div>
   </div>`;
 }
 
