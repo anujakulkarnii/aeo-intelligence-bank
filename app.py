@@ -1,16 +1,17 @@
 """
 AEO Intelligence Bank — Flask Web App
-Serves the intelligence bank UI and live bank.json data.
+Serves the React frontend and live bank.json API.
 """
 
 import json
 import os
-from flask import Flask, jsonify, render_template, abort
+from flask import Flask, jsonify, abort, send_from_directory
 
-app = Flask(__name__)
+BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
+BANK_PATH   = os.path.join(BASE_DIR, "bank.json")
+REACT_BUILD = os.path.join(BASE_DIR, "frontend", "dist")
 
-BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
-BANK_PATH = os.path.join(BASE_DIR, "bank.json")
+app = Flask(__name__, static_folder=None)
 
 VALID_SECTIONS = {
     "icp_phrases", "fanout_terms", "citations", "competitor_complaints",
@@ -29,11 +30,6 @@ def load_bank() -> dict:
         return {"meta": {}, "error": f"bank.json parse error: {e}"}
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-
 @app.route("/api/data")
 def api_data():
     return jsonify(load_bank())
@@ -43,13 +39,21 @@ def api_data():
 def api_section(name):
     if name not in VALID_SECTIONS:
         abort(404)
-    bank = load_bank()
-    return jsonify(bank.get(name, []))
+    return jsonify(load_bank().get(name, []))
 
 
 @app.route("/api/meta")
 def api_meta():
     return jsonify(load_bank().get("meta", {}))
+
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_react(path):
+    full = os.path.join(REACT_BUILD, path)
+    if path and os.path.exists(full):
+        return send_from_directory(REACT_BUILD, path)
+    return send_from_directory(REACT_BUILD, "index.html")
 
 
 if __name__ == "__main__":
