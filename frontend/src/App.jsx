@@ -146,7 +146,7 @@ function GlobalSearch({ data, onNavigate }) {
   }
 
   return (
-    <div className="relative w-full max-w-lg">
+    <div className="relative w-full max-w-2xl">
       <div className={`flex items-center gap-2 h-9 px-3 rounded-lg border transition-all ${
         open ? 'border-foreground/20 bg-white shadow-sm' : 'border-border bg-muted/60 hover:bg-muted'
       }`}>
@@ -501,7 +501,7 @@ function OverviewPage({ data }) {
   if (!data) return null
 
   return (
-    <div className="p-5 space-y-5">
+    <div className="p-6 space-y-5">
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {stats.map(s => <StatCard key={s.label} {...s} />)}
@@ -512,13 +512,13 @@ function OverviewPage({ data }) {
         {competitorCounts.length > 0 && (
           <Card>
             <SectionHeader title="Competitor Landscape" description="Mentions across all data sources" />
-            <div className="p-5"><BarChart data={competitorCounts} /></div>
+            <div className="p-6"><BarChart data={competitorCounts} /></div>
           </Card>
         )}
         {sourceCounts.length > 0 && (
           <Card>
             <SectionHeader title="ICP Source Breakdown" description="Number of ICP phrases by source — where your customers' exact language was found" />
-            <div className="p-5"><BarChart data={sourceCounts} /></div>
+            <div className="p-6"><BarChart data={sourceCounts} /></div>
           </Card>
         )}
       </div>
@@ -609,7 +609,7 @@ function IcpPage({ data, search, teamFilter }) {
   }, [data, search, teamFilter])
 
   return (
-    <div className="p-5">
+    <div className="p-6">
       <Card>
         <SectionHeader title="ICP Phrases" count={phrases.length} description="Customer language from community & reviews" />
         <div className="divide-y divide-border">
@@ -642,7 +642,7 @@ function HooksPage({ data, search, teamFilter }) {
   }, [data, search, teamFilter])
 
   return (
-    <div className="p-5">
+    <div className="p-6">
       <Card>
         <SectionHeader title="Outbound Hooks" count={hooks.length} description="Message angles for sales & marketing" />
         <div className="divide-y divide-border">
@@ -681,7 +681,7 @@ function CompetitorsPage({ data, search }) {
   }, [data, search])
 
   return (
-    <div className="p-5">
+    <div className="p-6">
       <Card>
         <SectionHeader title="Competitor Complaints" count={complaints.length} description="Weaknesses found across community & reviews" />
         <div className="divide-y divide-border">
@@ -714,7 +714,7 @@ function CitationsPage({ data, search }) {
   }, [data, search])
 
   return (
-    <div className="p-5">
+    <div className="p-6">
       <Card>
         <SectionHeader title="AI Citations" count={citations.length} description="FrontlineHQ visibility in AI engine responses" />
         {citations.length === 0 ? (
@@ -769,10 +769,10 @@ function HypothesesPage({ data, search, teamFilter }) {
   }, [data, search, teamFilter])
 
   return (
-    <div className="p-5 space-y-3">
+    <div className="p-6 space-y-3">
       {hyps.map(h => (
         <Card key={h.id}>
-          <div className="p-5">
+          <div className="p-6">
             <p className="text-sm text-foreground leading-relaxed">{h.hypothesis}</p>
             <div className="flex items-center gap-1.5 mt-3">
               {(h.teams || []).map(t => <Tag key={t}>{t}</Tag>)}
@@ -818,7 +818,7 @@ function FanoutPage({ data, search }) {
   }, [data, search])
 
   return (
-    <div className="p-5">
+    <div className="p-6">
       <Card>
         <SectionHeader title="Fanout Terms" count={terms.length} description="Background queries AI engines expand to" />
         <div className="divide-y divide-border">
@@ -848,7 +848,7 @@ function QueriesPage({ data, search }) {
   }, [data, search])
 
   return (
-    <div className="p-5">
+    <div className="p-6">
       <Card>
         <SectionHeader title="Next Queries" count={queries.length} description="Queued for next pipeline run" />
         <div className="divide-y divide-border">
@@ -884,10 +884,10 @@ function TranscriptsPage({ data, search }) {
   }, [data, search])
 
   return (
-    <div className="p-5 space-y-3">
+    <div className="p-6 space-y-3">
       {calls.map((c, i) => (
         <Card key={c.id || i}>
-          <div className="p-5">
+          <div className="p-6">
             <div className="flex items-start justify-between gap-3 mb-3">
               <p className="text-sm font-semibold text-foreground">{c.prospect || `Call ${i + 1}`}</p>
               <div className="flex items-center gap-1.5 shrink-0">
@@ -1006,7 +1006,7 @@ export default function App() {
           showTeamFilter={hasTeamFilter}
           onMenuClick={() => setSidebarOpen(true)}
         />
-        <main className="flex-1 max-w-4xl w-full mx-auto">
+        <main className="flex-1">
           {renderPage()}
         </main>
       </div>
