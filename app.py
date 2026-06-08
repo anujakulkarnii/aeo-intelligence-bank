@@ -32,76 +32,102 @@ def load_bank() -> dict:
 
 
 def build_bank_summary(bank: dict) -> str:
-    """Build a concise text summary of the bank for Claude context."""
+    """Build a full text dump of the bank for Claude context."""
     lines = []
 
     meta = bank.get("meta", {})
-    lines.append(f"Company: {meta.get('company', 'FrontlineHQ')}")
-    lines.append(f"Last run: {meta.get('last_run', 'unknown')} | Run count: {meta.get('run_count', 0)}")
+    lines.append(f"COMPANY: {meta.get('company', 'FrontlineHQ')}")
+    lines.append(f"Last pipeline run: {meta.get('last_run', 'unknown')} | Total runs: {meta.get('run_count', 0)}")
+    lines.append(f"Markets: {', '.join(meta.get('markets', []))}")
     lines.append("")
 
+    # ALL ICP phrases
     phrases = bank.get("icp_phrases", [])
-    if phrases:
-        lines.append(f"ICP PHRASES ({len(phrases)} total):")
-        for p in phrases[:20]:
-            lines.append(f"  [{p.get('source','')} / {','.join(p.get('teams',[]))}] \"{p.get('text','')}\"")
-        lines.append("")
+    lines.append(f"─── ICP PHRASES ({len(phrases)}) ───")
+    lines.append("These are exact phrases used by the target market (restaurant/hospitality operators) found on Reddit and web search.")
+    for p in phrases:
+        teams = ','.join(p.get('teams', []))
+        lines.append(f"  source={p.get('source','')} teams=[{teams}] hot={p.get('hot',False)} geo={p.get('geography','')}")
+        lines.append(f"  \"{p.get('text','')}\"")
+    lines.append("")
 
+    # ALL outbound hooks
     hooks = bank.get("outbound_hooks", [])
-    if hooks:
-        lines.append(f"OUTBOUND HOOKS ({len(hooks)} total):")
-        for h in hooks[:15]:
-            lines.append(f"  [{h.get('source','')} / {','.join(h.get('teams',[]))}] {h.get('text','')}")
-        lines.append("")
+    lines.append(f"─── OUTBOUND HOOKS ({len(hooks)}) ───")
+    lines.append("Message angles for sales outreach and marketing copy, derived from ICP language.")
+    for h in hooks:
+        teams = ','.join(h.get('teams', []))
+        lines.append(f"  source={h.get('source','')} teams=[{teams}]")
+        lines.append(f"  {h.get('text','')}")
+    lines.append("")
 
+    # ALL hypotheses with full detail
     hyps = bank.get("hypotheses", [])
-    if hyps:
-        lines.append(f"HYPOTHESES ({len(hyps)} total):")
-        for h in hyps:
-            lines.append(f"  [{','.join(h.get('teams',[]))} / {h.get('strength','')}] {h.get('hypothesis','')}")
-            if h.get("action"):
-                lines.append(f"    Action: {h['action'][:200]}")
-            if h.get("metric"):
-                lines.append(f"    Metric: {h['metric'][:150]}")
+    lines.append(f"─── HYPOTHESES ({len(hyps)}) ───")
+    lines.append("Strategic AEO/content hypotheses with full action plans and success metrics.")
+    for i, h in enumerate(hyps, 1):
+        teams = ','.join(h.get('teams', []))
+        lines.append(f"  [{i}] teams=[{teams}] strength={h.get('strength','')} status={h.get('status','')} date={h.get('generated_date','')[:10]}")
+        lines.append(f"  HYPOTHESIS: {h.get('hypothesis','')}")
+        lines.append(f"  EVIDENCE: {h.get('evidence','')}")
+        lines.append(f"  ACTION: {h.get('action','')}")
+        lines.append(f"  METRIC: {h.get('metric','')}")
         lines.append("")
+    lines.append("")
 
+    # ALL competitor complaints
     complaints = bank.get("competitor_complaints", [])
-    if complaints:
-        lines.append(f"COMPETITOR COMPLAINTS ({len(complaints)} total):")
-        for c in complaints:
-            lines.append(f"  [{c.get('tool','')} / {c.get('source','')}] {c.get('complaint','')}")
-        lines.append("")
+    lines.append(f"─── COMPETITOR COMPLAINTS ({len(complaints)}) ───")
+    for c in complaints:
+        teams = ','.join(c.get('teams', []))
+        lines.append(f"  competitor={c.get('tool', c.get('competitor',''))} source={c.get('source','')} teams=[{teams}]")
+        lines.append(f"  \"{c.get('complaint', c.get('text',''))}\"")
+    lines.append("")
 
+    # Fanout terms (all gaps)
     fanout = bank.get("fanout_terms", [])
-    if fanout:
-        lines.append(f"FANOUT TERMS ({len(fanout)} total — gaps where FrontlineHQ is absent):")
-        gaps = [t for t in fanout if t.get("frontlinehq_present") == False]
-        for t in gaps[:15]:
-            lines.append(f"  {t.get('term','')}")
-        lines.append("")
+    gaps = [t for t in fanout if t.get("frontlinehq_present") == False]
+    present = [t for t in fanout if t.get("frontlinehq_present") == True]
+    lines.append(f"─── FANOUT TERMS ({len(fanout)} total: {len(gaps)} gaps, {len(present)} present) ───")
+    lines.append("Search terms AI engines expand to. 'gap' = FrontlineHQ not appearing.")
+    for t in fanout:
+        status = "PRESENT" if t.get("frontlinehq_present") else "GAP"
+        lines.append(f"  [{status}] {t.get('term','')} (from query: \"{t.get('query','')}\") teams={t.get('teams',[])} ")
+    lines.append("")
 
+    # ALL next queries
     queries = bank.get("next_queries", [])
-    if queries:
-        lines.append(f"NEXT QUERIES ({len(queries)} queued):")
-        for q in queries:
-            lines.append(f"  {q.get('query','')} — {q.get('rationale','')[:120]}")
-        lines.append("")
+    lines.append(f"─── NEXT QUERIES ({len(queries)}) ───")
+    lines.append("Seed queries queued for the next pipeline run.")
+    for q in queries:
+        lines.append(f"  used={q.get('used','')} date={str(q.get('generated_date',''))[:10]}")
+        lines.append(f"  QUERY: {q.get('query','')}")
+        lines.append(f"  RATIONALE: {q.get('rationale','')}")
+    lines.append("")
 
+    # ALL sales calls with full detail
     calls = bank.get("sales_calls", [])
-    if calls:
-        lines.append(f"SALES CALLS ({len(calls)} total):")
-        for c in calls:
-            lines.append(f"  [{c.get('prospect','')} / {c.get('stage','')} / {c.get('outcome','')}]")
-            lines.append(f"    Signal: {c.get('signal','')}")
-            phrases_list = c.get("key_phrases", [])
-            if phrases_list:
-                lines.append(f"    Phrases: {' | '.join(phrases_list[:4])}")
-        lines.append("")
+    lines.append(f"─── SALES CALLS ({len(calls)}) ───")
+    for c in calls:
+        lines.append(f"  PROSPECT: {c.get('prospect','')} | stage={c.get('stage','')} outcome={c.get('outcome','')} date={str(c.get('date',''))[:10]}")
+        lines.append(f"  SIGNAL: {c.get('signal','')}")
+        for phrase in c.get('key_phrases', []):
+            lines.append(f"    phrase: \"{phrase}\"")
+        for obj in c.get('objections', []):
+            lines.append(f"    objection: {obj}")
+    lines.append("")
 
+    # AI citations
     citations = bank.get("ai_citations", [])
     if citations:
         cited = sum(1 for c in citations if c.get("frontlinehq_appears") is True)
-        lines.append(f"AI CITATIONS: {cited}/{len(citations)} queries where FrontlineHQ appears")
+        lines.append(f"─── AI CITATIONS ({len(citations)}, {cited} appear) ───")
+        for c in citations:
+            lines.append(f"  model={c.get('model','')} query=\"{c.get('query','')}\" appears={c.get('frontlinehq_appears')}")
+            if c.get('competitors_cited'):
+                lines.append(f"    competitors cited: {', '.join(c['competitors_cited'])}")
+    else:
+        lines.append("─── AI CITATIONS: none yet (pipeline needs Perplexity/Claude API key to run citation checks) ───")
 
     return "\n".join(lines)
 
@@ -137,21 +163,39 @@ def api_ask():
     bank = load_bank()
     summary = build_bank_summary(bank)
 
-    system_prompt = (
-        "You are an AEO intelligence assistant for FrontlineHQ. "
-        "You have access to the company's AEO/GEO intelligence bank — real data from Reddit, review sites, sales calls, and AI engine citation checks. "
-        "Answer the user's question using the data provided. Be concise, direct, and specific. "
-        "Reference exact phrases, competitor names, or hypothesis text when relevant. "
-        "If the data doesn't contain enough to answer, say so clearly."
-    )
+    system_prompt = """You are the AEO Intelligence Agent for FrontlineHQ — a B2B SaaS company selling frontline training and knowledge management software to multi-location hospitality and retail businesses.
 
-    user_message = f"Here is the current intelligence bank:\n\n{summary}\n\n---\n\nQuestion: {question}"
+You have full access to the AEO/GEO intelligence bank below, which contains:
+- Real ICP phrases scraped from Reddit and web sources
+- Outbound hooks derived from customer language
+- Strategic hypotheses with evidence, actions, and success metrics
+- Competitor complaints from real market sources
+- Fanout terms showing where FrontlineHQ has visibility gaps in AI search
+- Sales call transcripts with prospect language and objections
+- Next queries queued for the next pipeline run
+- AI citation data (whether FrontlineHQ appears in Perplexity/Claude responses)
+
+Your job: Answer ANY question about this data with maximum intelligence and specificity. You can:
+- Synthesise across multiple sections (e.g. correlate ICP phrases with sales call objections)
+- Rank, filter, or group items by team, source, strength, or relevance
+- Suggest experiments, content, or messaging based on the data
+- Identify patterns, gaps, or opportunities
+- Answer questions about what's missing or what should be prioritised
+
+Rules:
+1. ALWAYS answer. Never refuse to engage. If the exact data isn't in the bank, reason from what IS there and say what's inferred vs confirmed.
+2. If a topic has zero data (e.g. no AI citations yet), say exactly that, explain what it would look like when populated, and suggest the most relevant query to run next.
+3. Use exact quotes and numbers from the data — don't paraphrase vaguely.
+4. Be direct and structured. Use short headers or numbered lists when answering multi-part questions.
+5. When relevant, tell the user WHICH SECTION of the dashboard to look at for more detail."""
+
+    user_message = f"INTELLIGENCE BANK DATA:\n\n{summary}\n\n---\n\nQUESTION: {question}"
 
     try:
         client = anthropic.Anthropic(api_key=api_key)
         response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=600,
+            max_tokens=1200,
             system=system_prompt,
             messages=[{"role": "user", "content": user_message}],
         )
