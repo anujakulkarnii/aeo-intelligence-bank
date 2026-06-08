@@ -5,13 +5,12 @@ Serves the intelligence bank UI and live bank.json data.
 
 import json
 import os
-from flask import Flask, jsonify, render_template, abort, send_from_directory
+from flask import Flask, jsonify, render_template, abort
 
-app = Flask(__name__, static_folder=None)
+app = Flask(__name__)
 
-BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
-BANK_PATH   = os.path.join(BASE_DIR, "bank.json")
-REACT_BUILD = os.path.join(BASE_DIR, "frontend", "dist")
+BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
+BANK_PATH = os.path.join(BASE_DIR, "bank.json")
 
 VALID_SECTIONS = {
     "icp_phrases", "fanout_terms", "citations", "competitor_complaints",
@@ -30,13 +29,9 @@ def load_bank() -> dict:
         return {"meta": {}, "error": f"bank.json parse error: {e}"}
 
 
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve_react(path):
-    # API routes are handled above; everything else serves the React SPA
-    if path and os.path.exists(os.path.join(REACT_BUILD, path)):
-        return send_from_directory(REACT_BUILD, path)
-    return send_from_directory(REACT_BUILD, "index.html")
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 
 @app.route("/api/data")
