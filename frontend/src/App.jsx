@@ -6,8 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import {
   LayoutDashboard, MessageSquare, Zap, Users, Lightbulb, Search,
-  TrendingUp, FileText, Globe, ChevronRight, Menu, X, Brain,
-  Building2, Target, Hash, Filter
+  TrendingUp, FileText, Globe, Menu, Brain, Building2, Hash, Filter
 } from 'lucide-react'
 
 // ─── helpers ────────────────────────────────────────────────────────────────
@@ -61,18 +60,15 @@ const NAV = [
 function Sidebar({ active, setActive, open, setOpen }) {
   return (
     <>
-      {/* Mobile overlay */}
       {open && (
         <div className="fixed inset-0 bg-black/30 z-20 lg:hidden" onClick={() => setOpen(false)} />
       )}
-
       <aside className={`
         fixed top-0 left-0 h-full z-30 flex flex-col
         w-[220px] bg-white border-r border-border
         transition-transform duration-200
         ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        {/* Logo */}
         <div className="px-5 py-6 border-b border-border">
           <div className="leading-none">
             <span className="font-heading font-bold text-xl text-foreground tracking-tight">FrontlineHQ</span>
@@ -81,8 +77,6 @@ function Sidebar({ active, setActive, open, setOpen }) {
             <span className="font-heading text-[11px] text-muted-foreground tracking-widest uppercase">AEO / GEO Bank</span>
           </div>
         </div>
-
-        {/* Nav */}
         <nav className="flex-1 overflow-y-auto py-3 px-2">
           {NAV.map(item => {
             const Icon = item.icon
@@ -106,8 +100,6 @@ function Sidebar({ active, setActive, open, setOpen }) {
             )
           })}
         </nav>
-
-        {/* Footer */}
         <div className="px-5 py-4 border-t border-border">
           <p className="text-[10px] text-muted-foreground">AEO Intelligence Pipeline</p>
         </div>
@@ -143,8 +135,6 @@ function TopBar({ title, subtitle, search, setSearch, teamFilter, setTeamFilter,
           </div>
         )}
       </div>
-
-      {/* Team filter pills */}
       {setTeamFilter && (
         <div className="flex items-center gap-1.5 mt-2.5 flex-wrap">
           <span className="text-[10px] text-muted-foreground uppercase tracking-wide mr-1 flex items-center gap-1"><Filter size={10}/>Team</span>
@@ -169,11 +159,11 @@ function TopBar({ title, subtitle, search, setSearch, teamFilter, setTeamFilter,
 
 // ─── stat card ──────────────────────────────────────────────────────────────
 
-function StatCard({ label, value, sub }) {
+function StatCard({ label, value, sub, highlight }) {
   return (
-    <Card className="p-5">
+    <Card className={`p-5 ${highlight ? 'border-primary/40 bg-primary/5' : ''}`}>
       <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">{label}</p>
-      <p className="font-heading font-bold text-4xl leading-none tracking-tight text-foreground">{value}</p>
+      <p className={`font-heading font-bold text-4xl leading-none tracking-tight ${highlight ? 'text-primary' : 'text-foreground'}`}>{value}</p>
       {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
     </Card>
   )
@@ -181,13 +171,13 @@ function StatCard({ label, value, sub }) {
 
 // ─── bar chart ──────────────────────────────────────────────────────────────
 
-function BarChart({ data, valueKey = 'count', labelKey = 'name', max }) {
-  const maxVal = max || Math.max(...data.map(d => d[valueKey] || 0), 1)
+function BarChart({ data, valueKey = 'count', labelKey = 'name' }) {
+  const maxVal = Math.max(...data.map(d => d[valueKey] || 0), 1)
   return (
     <div className="space-y-2">
       {data.map((row, i) => (
-        <div key={i} className="flex items-center gap-3 text-sm">
-          <span className="w-32 text-xs text-muted-foreground truncate shrink-0">{row[labelKey]}</span>
+        <div key={i} className="flex items-center gap-3">
+          <span className="w-36 text-xs text-muted-foreground truncate shrink-0">{row[labelKey]}</span>
           <div className="flex-1 bg-muted rounded-full h-1.5 overflow-hidden">
             <div
               className="h-full bg-primary rounded-full transition-all duration-500"
@@ -204,35 +194,42 @@ function BarChart({ data, valueKey = 'count', labelKey = 'name', max }) {
 // ─── overview page ──────────────────────────────────────────────────────────
 
 function OverviewPage({ data }) {
+  const citationRate = useMemo(() => {
+    const items = data?.ai_citations || []
+    if (!items.length) return null
+    const cited = items.filter(c => c.frontlinehq_appears === true).length
+    return Math.round((cited / items.length) * 100)
+  }, [data])
+
   const stats = useMemo(() => {
     if (!data) return []
     return [
-      { label: 'ICP Phrases', value: data.icp_phrases?.length || 0 },
+      {
+        label: 'Citation Rate',
+        value: citationRate !== null ? `${citationRate}%` : '—',
+        sub: citationRate !== null ? `${data.ai_citations.filter(c=>c.frontlinehq_appears===true).length} of ${data.ai_citations.length} AI queries` : 'Run pipeline to check',
+        highlight: true,
+      },
+      { label: 'ICP Phrases',    value: data.icp_phrases?.length || 0 },
       { label: 'Outbound Hooks', value: data.outbound_hooks?.length || 0 },
-      { label: 'Hypotheses', value: data.hypotheses?.length || 0 },
-      { label: 'Citations Checked', value: data.ai_citations?.length || 0, sub: 'across AI engines' },
-      { label: 'Fanout Terms', value: data.fanout_terms?.length || 0 },
-      { label: 'Sales Calls', value: data.sales_calls?.length || 0 },
+      { label: 'Hypotheses',     value: data.hypotheses?.length || 0 },
+      { label: 'Fanout Terms',   value: data.fanout_terms?.length || 0 },
+      { label: 'Sales Calls',    value: data.sales_calls?.length || 0 },
     ]
-  }, [data])
+  }, [data, citationRate])
 
-  // competitor table
   const competitorCounts = useMemo(() => {
     if (!data) return []
     const counts = {}
     ;(data.competitor_complaints || []).forEach(c => {
-      const name = c.competitor || c.name
+      const name = c.tool || c.competitor || c.name
       if (name) counts[name] = (counts[name] || 0) + 1
     })
     ;(data.citations || []).forEach(c => {
-      ;(c.competitors_cited || []).forEach(name => {
-        counts[name] = (counts[name] || 0) + 1
-      })
+      ;(c.competitors_cited || []).forEach(name => { counts[name] = (counts[name] || 0) + 1 })
     })
     ;(data.ai_citations || []).forEach(c => {
-      ;(c.competitors_cited || []).forEach(name => {
-        counts[name] = (counts[name] || 0) + 1
-      })
+      ;(c.competitors_cited || []).forEach(name => { counts[name] = (counts[name] || 0) + 1 })
     })
     return Object.entries(counts)
       .map(([name, count]) => ({ name, count }))
@@ -240,18 +237,6 @@ function OverviewPage({ data }) {
       .slice(0, 8)
   }, [data])
 
-  // AI citation grid
-  const citationRows = useMemo(() => {
-    if (!data?.ai_citations?.length) return []
-    const byQuery = {}
-    data.ai_citations.forEach(c => {
-      if (!byQuery[c.query]) byQuery[c.query] = {}
-      byQuery[c.query][c.model] = c.frontlinehq_appears === true
-    })
-    return Object.entries(byQuery).slice(0, 8).map(([query, models]) => ({ query, models }))
-  }, [data])
-
-  // Source breakdown
   const sourceCounts = useMemo(() => {
     if (!data) return []
     const counts = {}
@@ -262,17 +247,25 @@ function OverviewPage({ data }) {
     return Object.entries(counts).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count)
   }, [data])
 
+  const citationRows = useMemo(() => {
+    if (!data?.ai_citations?.length) return []
+    const byQuery = {}
+    data.ai_citations.forEach(c => {
+      if (!byQuery[c.query]) byQuery[c.query] = {}
+      byQuery[c.query][c.model] = c.frontlinehq_appears === true
+    })
+    return Object.entries(byQuery).slice(0, 8).map(([query, models]) => ({ query, models }))
+  }, [data])
+
   if (!data) return null
 
   return (
     <div className="p-6 space-y-6">
-      {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {stats.map(s => <StatCard key={s.label} {...s} />)}
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Competitor landscape */}
         {competitorCounts.length > 0 && (
           <Card>
             <CardHeader className="pb-3">
@@ -284,8 +277,6 @@ function OverviewPage({ data }) {
             </CardContent>
           </Card>
         )}
-
-        {/* Source breakdown */}
         {sourceCounts.length > 0 && (
           <Card>
             <CardHeader className="pb-3">
@@ -299,7 +290,6 @@ function OverviewPage({ data }) {
         )}
       </div>
 
-      {/* AI Citation Grid */}
       {citationRows.length > 0 && (
         <Card>
           <CardHeader className="pb-3">
@@ -326,8 +316,8 @@ function OverviewPage({ data }) {
                           {row.models[m] === undefined
                             ? <span className="text-muted-foreground text-xs">—</span>
                             : row.models[m]
-                              ? <span className="text-emerald-600 font-bold text-sm">✓</span>
-                              : <span className="text-red-400 font-bold text-sm">✗</span>
+                              ? <span className="text-emerald-600 font-bold">✓</span>
+                              : <span className="text-red-400 font-bold">✗</span>
                           }
                         </td>
                       ))}
@@ -340,7 +330,6 @@ function OverviewPage({ data }) {
         </Card>
       )}
 
-      {/* Top ICP phrases */}
       {data.icp_phrases?.length > 0 && (
         <Card>
           <CardHeader className="pb-3">
@@ -355,7 +344,7 @@ function OverviewPage({ data }) {
                   <span className="text-sm text-foreground flex-1">"{p.text}"</span>
                   <div className="flex gap-1 shrink-0">
                     {(p.teams || []).slice(0, 2).map(t => (
-                      <Badge key={t} variant="secondary" className="text-[10px] px-1.5 py-0">{t}</Badge>
+                      <span key={t} className="text-[10px] text-muted-foreground border border-border rounded px-1.5 py-0.5">{t}</span>
                     ))}
                   </div>
                 </div>
@@ -365,23 +354,24 @@ function OverviewPage({ data }) {
         </Card>
       )}
 
-      {/* Hypotheses */}
       {data.hypotheses?.length > 0 && (
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-base">Latest Hypotheses</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              {data.hypotheses.slice(0, 4).map(h => (
-                <div key={h.id} className="p-3 rounded-md border border-border/60 text-sm">
-                  <div className="flex items-start gap-2">
-                    <Lightbulb size={13} className="text-amber-500 shrink-0 mt-0.5" />
-                    <span className="text-foreground">{h.text}</span>
+            <div className="space-y-3">
+              {data.hypotheses.slice(0, 3).map(h => (
+                <div key={h.id} className="p-4 rounded-md border border-border">
+                  <div className="flex items-start gap-2 mb-2">
+                    <Lightbulb size={14} className="text-amber-500 shrink-0 mt-0.5" />
+                    <p className="text-sm text-foreground leading-relaxed">{h.hypothesis}</p>
                   </div>
-                  <div className="flex gap-2 mt-2">
-                    {h.team && <Badge variant="secondary" className="text-[10px]">{h.team}</Badge>}
-                    {h.confidence && <Badge variant="outline" className="text-[10px]">{h.confidence}</Badge>}
+                  <div className="flex gap-2 mt-2 pl-5">
+                    {(h.teams || []).map(t => (
+                      <span key={t} className="text-[10px] text-muted-foreground border border-border rounded px-1.5 py-0.5">{t}</span>
+                    ))}
+                    {h.strength && <span className="text-[10px] text-muted-foreground border border-border rounded px-1.5 py-0.5">{h.strength}</span>}
                   </div>
                 </div>
               ))}
@@ -393,7 +383,7 @@ function OverviewPage({ data }) {
   )
 }
 
-// ─── list pages ─────────────────────────────────────────────────────────────
+// ─── icp page ────────────────────────────────────────────────────────────────
 
 function IcpPage({ data, search, teamFilter }) {
   const phrases = useMemo(() => {
@@ -411,14 +401,14 @@ function IcpPage({ data, search, teamFilter }) {
           <div key={p.id} className="p-4 rounded-lg border border-border bg-card hover:border-primary/30 transition-colors">
             <p className="text-sm text-foreground mb-2">"{p.text}"</p>
             <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="outline" className="text-[10px]">{bucketOf(p.source)}</Badge>
+              <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{bucketOf(p.source)}</span>
               {p.geography && p.geography !== 'Unknown' && (
-                <Badge variant="secondary" className="text-[10px]"><Globe size={9} className="mr-1"/>{p.geography}</Badge>
+                <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{p.geography}</span>
               )}
               {(p.teams || []).map(t => (
-                <Badge key={t} variant="secondary" className="text-[10px]">{t}</Badge>
+                <span key={t} className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{t}</span>
               ))}
-              {p.hot && <Badge variant="success" className="text-[10px]">Hot</Badge>}
+              {p.hot && <span className="text-[10px] bg-emerald-100 text-emerald-700 rounded px-1.5 py-0.5">Hot</span>}
               <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(p.run_date)}</span>
             </div>
           </div>
@@ -428,6 +418,8 @@ function IcpPage({ data, search, teamFilter }) {
     </div>
   )
 }
+
+// ─── hooks page ──────────────────────────────────────────────────────────────
 
 function HooksPage({ data, search, teamFilter }) {
   const hooks = useMemo(() => {
@@ -447,9 +439,11 @@ function HooksPage({ data, search, teamFilter }) {
               <Zap size={13} className="text-primary shrink-0 mt-0.5" />
               <p className="text-sm text-foreground flex-1">{h.text}</p>
             </div>
-            <div className="flex gap-2 mt-2 flex-wrap">
-              {(h.teams || []).map(t => <Badge key={t} variant="secondary" className="text-[10px]">{t}</Badge>)}
-              {h.channel && <Badge variant="outline" className="text-[10px]">{h.channel}</Badge>}
+            <div className="flex gap-2 mt-2 pl-5 flex-wrap">
+              {(h.teams || []).map(t => (
+                <span key={t} className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{t}</span>
+              ))}
+              {h.channel && <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{h.channel}</span>}
               <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(h.run_date)}</span>
             </div>
           </div>
@@ -460,12 +454,14 @@ function HooksPage({ data, search, teamFilter }) {
   )
 }
 
+// ─── competitors page ────────────────────────────────────────────────────────
+
 function CompetitorsPage({ data, search }) {
   const complaints = useMemo(() => {
     let items = data?.competitor_complaints || []
     if (search) items = items.filter(c =>
-      (c.competitor || c.name || '').toLowerCase().includes(search.toLowerCase()) ||
-      (c.text || '').toLowerCase().includes(search.toLowerCase())
+      (c.tool || c.competitor || c.name || '').toLowerCase().includes(search.toLowerCase()) ||
+      (c.complaint || c.text || '').toLowerCase().includes(search.toLowerCase())
     )
     return items
   }, [data, search])
@@ -477,12 +473,17 @@ function CompetitorsPage({ data, search }) {
         {complaints.map((c, i) => (
           <div key={c.id || i} className="p-4 rounded-lg border border-border bg-card hover:border-primary/30 transition-colors">
             <div className="flex items-start gap-2 mb-2">
-              <Building2 size={13} className="text-muted-foreground shrink-0 mt-0.5" />
-              <span className="text-xs font-semibold text-primary">{c.competitor || c.name}</span>
+              <Building2 size={13} className="text-primary shrink-0 mt-0.5" />
+              <span className="text-sm font-semibold text-primary">{c.tool || c.competitor || c.name}</span>
             </div>
-            {c.text && <p className="text-sm text-foreground ml-5">{c.text}</p>}
-            <div className="flex gap-2 mt-2 ml-5">
-              {c.source && <Badge variant="outline" className="text-[10px]">{bucketOf(c.source)}</Badge>}
+            {(c.complaint || c.text) && (
+              <p className="text-sm text-foreground ml-5">{c.complaint || c.text}</p>
+            )}
+            <div className="flex gap-2 mt-2 ml-5 flex-wrap">
+              {c.source && <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{bucketOf(c.source)}</span>}
+              {(c.teams || []).map(t => (
+                <span key={t} className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{t}</span>
+              ))}
               <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(c.run_date)}</span>
             </div>
           </div>
@@ -492,6 +493,8 @@ function CompetitorsPage({ data, search }) {
     </div>
   )
 }
+
+// ─── citations page ──────────────────────────────────────────────────────────
 
 function CitationsPage({ data, search }) {
   const citations = useMemo(() => {
@@ -503,16 +506,23 @@ function CitationsPage({ data, search }) {
   return (
     <div className="p-6">
       <div className="text-xs text-muted-foreground mb-4">{citations.length} checks</div>
+      {citations.length === 0 && (
+        <div className="rounded-lg border border-border p-8 text-center">
+          <Brain size={24} className="mx-auto mb-3 text-muted-foreground/40" />
+          <p className="text-sm text-muted-foreground">No AI citation checks yet.</p>
+          <p className="text-xs text-muted-foreground mt-1">Run the pipeline with a Perplexity or Claude API key to populate this.</p>
+        </div>
+      )}
       <div className="space-y-2">
         {citations.map((c, i) => (
           <div key={c.id || i} className="p-4 rounded-lg border border-border bg-card">
             <div className="flex items-start justify-between gap-3 mb-3">
               <p className="text-sm text-foreground font-medium">{c.query}</p>
               <div className="flex items-center gap-1.5 shrink-0">
-                <Badge variant="secondary" className="text-[10px] capitalize">{c.model}</Badge>
+                <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground capitalize">{c.model}</span>
                 {c.frontlinehq_appears === true
-                  ? <Badge variant="success" className="text-[10px]">✓ Cited</Badge>
-                  : <Badge variant="outline" className="text-[10px] text-red-500 border-red-200">✗ Not cited</Badge>
+                  ? <span className="text-[10px] bg-emerald-100 text-emerald-700 rounded px-1.5 py-0.5">✓ Cited</span>
+                  : <span className="text-[10px] bg-red-50 text-red-500 border border-red-200 rounded px-1.5 py-0.5">✗ Not cited</span>
                 }
               </div>
             </div>
@@ -523,46 +533,72 @@ function CitationsPage({ data, search }) {
             )}
             {c.competitors_cited?.length > 0 && (
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-[10px] text-muted-foreground">Competitors mentioned:</span>
+                <span className="text-[10px] text-muted-foreground">Competitors:</span>
                 {c.competitors_cited.map(n => (
-                  <Badge key={n} variant="secondary" className="text-[10px]">{n}</Badge>
+                  <span key={n} className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{n}</span>
                 ))}
               </div>
             )}
-            <div className="flex gap-2 mt-2">
-              <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(c.date || c.run_date)}</span>
+            <div className="mt-2">
+              <span className="text-[10px] text-muted-foreground">{fmtDate(c.date || c.run_date)}</span>
             </div>
           </div>
         ))}
-        {citations.length === 0 && <EmptyState text="No AI citation checks found." />}
       </div>
     </div>
   )
 }
 
+// ─── hypotheses page ─────────────────────────────────────────────────────────
+
 function HypothesesPage({ data, search, teamFilter }) {
   const hyps = useMemo(() => {
     let items = data?.hypotheses || []
-    if (teamFilter) items = items.filter(h => h.team === teamFilter)
-    if (search) items = items.filter(h => h.text?.toLowerCase().includes(search.toLowerCase()))
+    if (teamFilter) items = items.filter(h => h.teams?.includes(teamFilter))
+    if (search) items = items.filter(h =>
+      (h.hypothesis || '').toLowerCase().includes(search.toLowerCase()) ||
+      (h.action || '').toLowerCase().includes(search.toLowerCase())
+    )
     return items
   }, [data, search, teamFilter])
 
   return (
     <div className="p-6">
       <div className="text-xs text-muted-foreground mb-4">{hyps.length} hypotheses</div>
-      <div className="space-y-2">
+      <div className="space-y-4">
         {hyps.map(h => (
-          <div key={h.id} className="p-4 rounded-lg border border-border bg-card hover:border-primary/30 transition-colors">
-            <div className="flex items-start gap-2 mb-2">
-              <Lightbulb size={13} className="text-amber-500 shrink-0 mt-0.5" />
-              <p className="text-sm text-foreground">{h.text}</p>
+          <div key={h.id} className="rounded-lg border border-border bg-card overflow-hidden">
+            <div className="p-5">
+              <div className="flex items-start gap-3 mb-3">
+                <Lightbulb size={16} className="text-amber-500 shrink-0 mt-0.5" />
+                <p className="text-sm text-foreground leading-relaxed">{h.hypothesis}</p>
+              </div>
+              {h.action && (
+                <div className="mt-3 pl-7">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-1">Action</p>
+                  <p className="text-xs text-foreground leading-relaxed">{h.action}</p>
+                </div>
+              )}
+              {h.metric && (
+                <div className="mt-3 pl-7">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-1">Success Metric</p>
+                  <p className="text-xs text-foreground leading-relaxed">{h.metric}</p>
+                </div>
+              )}
             </div>
-            <div className="flex gap-2 flex-wrap">
-              {h.team && <Badge variant="secondary" className="text-[10px]">{h.team}</Badge>}
-              {h.confidence && <Badge variant="outline" className="text-[10px]">{h.confidence}</Badge>}
-              {h.action && <Badge variant="secondary" className="text-[10px]">{h.action}</Badge>}
-              <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(h.run_date)}</span>
+            <div className="px-5 py-3 border-t border-border bg-muted/30 flex items-center gap-2 flex-wrap">
+              {(h.teams || []).map(t => (
+                <span key={t} className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground bg-white">{t}</span>
+              ))}
+              {h.strength && (
+                <span className={`text-[10px] rounded px-1.5 py-0.5 border ${
+                  h.strength === 'strong' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'border-border text-muted-foreground bg-white'
+                }`}>{h.strength}</span>
+              )}
+              {h.status && (
+                <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground bg-white">{h.status}</span>
+              )}
+              <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(h.generated_date)}</span>
             </div>
           </div>
         ))}
@@ -572,21 +608,34 @@ function HypothesesPage({ data, search, teamFilter }) {
   )
 }
 
+// ─── fanout page ─────────────────────────────────────────────────────────────
+
 function FanoutPage({ data, search }) {
   const terms = useMemo(() => {
     let items = data?.fanout_terms || []
-    if (search) items = items.filter(t => t.text?.toLowerCase().includes(search.toLowerCase()))
+    if (search) items = items.filter(t => (t.term || '').toLowerCase().includes(search.toLowerCase()))
     return items
   }, [data, search])
 
   return (
     <div className="p-6">
       <div className="text-xs text-muted-foreground mb-4">{terms.length} terms</div>
-      <div className="flex flex-wrap gap-2">
+      <div className="space-y-2">
         {terms.map((t, i) => (
-          <div key={t.id || i} className="px-3 py-1.5 rounded-full border border-border bg-card text-sm text-foreground hover:border-primary/40 transition-colors">
-            <Hash size={10} className="inline mr-1 text-muted-foreground" />
-            {t.text}
+          <div key={t.id || i} className="flex items-start gap-3 p-3 rounded-md border border-border bg-card hover:border-primary/30 transition-colors">
+            <TrendingUp size={13} className="text-muted-foreground shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-foreground">{t.term}</p>
+              {t.query && <p className="text-xs text-muted-foreground mt-0.5">From: "{t.query}"</p>}
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              {(t.teams || []).map(tm => (
+                <span key={tm} className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground">{tm}</span>
+              ))}
+              {t.frontlinehq_present === false && (
+                <span className="text-[10px] bg-red-50 text-red-400 border border-red-200 rounded px-1.5 py-0.5">gap</span>
+              )}
+            </div>
           </div>
         ))}
         {terms.length === 0 && <EmptyState text="No fanout terms found." />}
@@ -595,10 +644,12 @@ function FanoutPage({ data, search }) {
   )
 }
 
+// ─── queries page ────────────────────────────────────────────────────────────
+
 function QueriesPage({ data, search }) {
   const queries = useMemo(() => {
     let items = data?.next_queries || []
-    if (search) items = items.filter(q => q.text?.toLowerCase().includes(search.toLowerCase()))
+    if (search) items = items.filter(q => (q.query || '').toLowerCase().includes(search.toLowerCase()))
     return items
   }, [data, search])
 
@@ -607,10 +658,18 @@ function QueriesPage({ data, search }) {
       <div className="text-xs text-muted-foreground mb-4">{queries.length} queries queued</div>
       <div className="space-y-2">
         {queries.map((q, i) => (
-          <div key={q.id || i} className="flex items-start gap-3 p-3 rounded-md border border-border bg-card">
-            <Search size={13} className="text-muted-foreground shrink-0 mt-0.5" />
-            <p className="text-sm text-foreground">{q.text}</p>
-            <span className="text-[10px] text-muted-foreground ml-auto shrink-0">{fmtDate(q.run_date)}</span>
+          <div key={q.id || i} className="p-4 rounded-lg border border-border bg-card hover:border-primary/30 transition-colors">
+            <div className="flex items-start gap-3 mb-2">
+              <Search size={13} className="text-muted-foreground shrink-0 mt-0.5" />
+              <p className="text-sm text-foreground">{q.query}</p>
+            </div>
+            {q.rationale && (
+              <p className="text-xs text-muted-foreground pl-7 leading-relaxed">{q.rationale}</p>
+            )}
+            <div className="flex items-center gap-2 mt-2 pl-7">
+              {q.used === false && <span className="text-[10px] bg-amber-50 text-amber-600 border border-amber-200 rounded px-1.5 py-0.5">unused</span>}
+              <span className="text-[10px] text-muted-foreground ml-auto">{fmtDate(q.generated_date)}</span>
+            </div>
           </div>
         ))}
         {queries.length === 0 && <EmptyState text="No next queries found." />}
@@ -619,12 +678,14 @@ function QueriesPage({ data, search }) {
   )
 }
 
+// ─── transcripts page ────────────────────────────────────────────────────────
+
 function TranscriptsPage({ data, search }) {
   const calls = useMemo(() => {
     let items = data?.sales_calls || []
     if (search) items = items.filter(c =>
-      (c.filename || c.id || '').toLowerCase().includes(search.toLowerCase()) ||
-      (c.summary || '').toLowerCase().includes(search.toLowerCase())
+      (c.prospect || '').toLowerCase().includes(search.toLowerCase()) ||
+      (c.signal || '').toLowerCase().includes(search.toLowerCase())
     )
     return items
   }, [data, search])
@@ -632,24 +693,50 @@ function TranscriptsPage({ data, search }) {
   return (
     <div className="p-6">
       <div className="text-xs text-muted-foreground mb-4">{calls.length} transcripts</div>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {calls.map((c, i) => (
-          <Card key={c.id || i} className="p-4">
-            <div className="flex items-start justify-between gap-2 mb-2">
-              <div className="flex items-center gap-2">
-                <FileText size={13} className="text-primary shrink-0" />
-                <span className="text-sm font-medium">{c.filename || `Call ${i + 1}`}</span>
+          <Card key={c.id || i} className="overflow-hidden">
+            <div className="p-5">
+              <div className="flex items-start justify-between gap-2 mb-3">
+                <div className="flex items-center gap-2">
+                  <FileText size={14} className="text-primary shrink-0" />
+                  <span className="text-sm font-semibold">{c.prospect || `Call ${i + 1}`}</span>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {c.stage && <span className="text-[10px] border border-border rounded px-1.5 py-0.5 text-muted-foreground capitalize">{c.stage}</span>}
+                  {c.outcome && (
+                    <span className={`text-[10px] rounded px-1.5 py-0.5 border ${
+                      c.outcome === 'won' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-500 border-red-200'
+                    }`}>{c.outcome}</span>
+                  )}
+                </div>
               </div>
-              <span className="text-[10px] text-muted-foreground">{fmtDate(c.run_date)}</span>
+              {c.signal && (
+                <p className="text-xs text-muted-foreground leading-relaxed mb-3 pl-6 italic">{c.signal}</p>
+              )}
+              {c.key_phrases?.length > 0 && (
+                <div className="pl-6 space-y-1.5">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Key phrases</p>
+                  {c.key_phrases.slice(0, 4).map((p, j) => (
+                    <p key={j} className="text-xs text-foreground border-l-2 border-primary/30 pl-2 leading-relaxed">"{p}"</p>
+                  ))}
+                  {c.key_phrases.length > 4 && (
+                    <p className="text-[10px] text-muted-foreground pl-2">+{c.key_phrases.length - 4} more</p>
+                  )}
+                </div>
+              )}
+              {c.objections?.length > 0 && (
+                <div className="pl-6 mt-3 space-y-1.5">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Objections</p>
+                  {c.objections.map((o, j) => (
+                    <p key={j} className="text-xs text-foreground border-l-2 border-red-200 pl-2 leading-relaxed">{o}</p>
+                  ))}
+                </div>
+              )}
             </div>
-            {c.summary && <p className="text-xs text-muted-foreground mb-2 pl-5">{c.summary}</p>}
-            {c.phrases?.length > 0 && (
-              <div className="pl-5 space-y-1">
-                {c.phrases.slice(0, 3).map((p, j) => (
-                  <p key={j} className="text-xs italic text-foreground border-l-2 border-primary/30 pl-2">"{p}"</p>
-                ))}
-              </div>
-            )}
+            <div className="px-5 py-3 border-t border-border bg-muted/30">
+              <span className="text-[10px] text-muted-foreground">{fmtDate(c.date)}</span>
+            </div>
           </Card>
         ))}
         {calls.length === 0 && <EmptyState text="No sales call transcripts found." />}
@@ -666,7 +753,7 @@ function EmptyState({ text }) {
   )
 }
 
-// ─── page titles ────────────────────────────────────────────────────────────
+// ─── page meta ───────────────────────────────────────────────────────────────
 
 const PAGE_META = {
   overview:    { title: 'Overview',           subtitle: 'AEO Intelligence summary' },
@@ -689,7 +776,6 @@ export default function App() {
   const [search, setSearch] = useState('')
   const [teamFilter, setTeamFilter] = useState(null)
 
-  // Reset search/filter when switching pages
   const handleSetActive = (page) => {
     setActive(page)
     setSearch('')
@@ -697,10 +783,7 @@ export default function App() {
   }
 
   const meta = PAGE_META[active] || { title: active }
-
-  // Pages with team filter
   const hasTeamFilter = ['icp', 'hooks', 'hypotheses'].includes(active)
-  // Pages with search
   const hasSearch = active !== 'overview'
 
   const renderPage = () => {
@@ -714,7 +797,6 @@ export default function App() {
         <div className="text-destructive text-sm">Error: {error}</div>
       </div>
     )
-
     switch (active) {
       case 'overview':    return <OverviewPage data={data} />
       case 'icp':         return <IcpPage data={data} search={search} teamFilter={teamFilter} />
@@ -732,8 +814,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       <Sidebar active={active} setActive={handleSetActive} open={sidebarOpen} setOpen={setSidebarOpen} />
-
-      {/* Main content shifted for sidebar */}
       <div className="lg:pl-[220px] flex flex-col min-h-screen">
         <TopBar
           title={meta.title}
@@ -744,12 +824,7 @@ export default function App() {
           setTeamFilter={hasTeamFilter ? setTeamFilter : undefined}
           onMenuClick={() => setSidebarOpen(true)}
         />
-
-        <main className="flex-1">
-          {renderPage()}
-        </main>
-
-        {/* Last run footer */}
+        <main className="flex-1">{renderPage()}</main>
         {data?.meta && (
           <footer className="px-6 py-3 border-t border-border text-[10px] text-muted-foreground flex items-center gap-3">
             <span>Last run: {fmtDate(data.meta.last_run)}</span>
