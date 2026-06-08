@@ -291,16 +291,21 @@ function renderStatBlocks() {
 
 function renderCompetitorTable() {
   const freq = {};
+  // From citations (search results)
   (D.citations||[]).forEach(c => {
     (c.competitors_cited||[]).forEach(comp => {
       freq[comp] = (freq[comp]||0) + 1;
     });
   });
-  // Also from ai_citations
+  // From ai_citations
   (D.ai_citations||[]).forEach(c => {
     (c.competitors_cited||[]).forEach(comp => {
       freq[comp] = (freq[comp]||0) + 1;
     });
+  });
+  // From competitor_complaints (most reliable source)
+  (D.competitor_complaints||[]).forEach(c => {
+    if (c.tool) freq[c.tool] = (freq[c.tool]||0) + 1;
   });
 
   const sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,8);
@@ -338,26 +343,37 @@ function renderCompetitorTable() {
 }
 
 function renderSourceDomains() {
-  // Derive source type breakdown from various bank entries
-  const counts = { reddit: 0, review_site: 0, search: 0, sales_call: 0 };
-  (D.icp_phrases||[]).forEach(p => { const s = p.source||'search'; counts[s] = (counts[s]||0)+1; });
-  (D.outbound_hooks||[]).forEach(h => { const s = h.source||'search'; counts[s] = (counts[s]||0)+1; });
-  (D.competitor_complaints||[]).forEach(c => { const s = c.source||'search'; counts[s]=(counts[s]||0)+1; });
+  // Normalise sources to known buckets
+  const buckets = { reddit: 0, review_site: 0, search: 0, sales_call: 0 };
 
-  const total = Object.values(counts).reduce((a,b)=>a+b,0) || 1;
+  function bucketOf(src) {
+    if (!src) return 'search';
+    const s = src.toLowerCase();
+    if (s.includes('reddit'))                       return 'reddit';
+    if (s.includes('review') || s.includes('g2') || s.includes('capterra')) return 'review_site';
+    if (s.includes('sales') || s.includes('transcript')) return 'sales_call';
+    return 'search';
+  }
+
+  (D.icp_phrases||[]).forEach(p => { const b = bucketOf(p.source); buckets[b]++; });
+  (D.outbound_hooks||[]).forEach(h => { const b = bucketOf(h.source); buckets[b]++; });
+  (D.competitor_complaints||[]).forEach(c => { const b = bucketOf(c.source); buckets[b]++; });
+  (D.sales_calls||[]).forEach(() => { buckets.sales_call++; });
+
+  const total = Object.values(buckets).reduce((a,b)=>a+b,0) || 1;
 
   const typeMap = {
-    reddit:      { label: 'Reddit', badge: 'ugc',       type: 'UGC' },
-    review_site: { label: 'G2 / Capterra', badge: 'editorial', type: 'Editorial' },
-    search:      { label: 'Search results', badge: 'corporate', type: 'Corporate' },
-    sales_call:  { label: 'Sales calls', badge: 'ugc',       type: 'UGC' },
+    reddit:      { label: 'Reddit / Community', badge: 'ugc',       type: 'UGC' },
+    review_site: { label: 'G2 / Capterra',       badge: 'editorial', type: 'Editorial' },
+    search:      { label: 'Search results',      badge: 'corporate', type: 'Web' },
+    sales_call:  { label: 'Sales transcripts',   badge: 'ugc',       type: 'Primary' },
   };
 
-  const rows = Object.entries(counts)
+  const rows = Object.entries(buckets)
     .filter(([,n]) => n > 0)
     .sort((a,b)=>b[1]-a[1])
     .map(([src, n]) => {
-      const info = typeMap[src] || { label: src, badge: 'corporate', type: 'Other' };
+      const info = typeMap[src];
       const pct  = Math.round(n/total*100);
       return `<div class="source-row">
         <span class="source-name">${esc(info.label)}</span>
@@ -399,8 +415,9 @@ function renderCitationGrid() {
   });
   Object.values(aiByKey).forEach(c => {
     if (!grid[c.query]) grid[c.query] = {google:null, perplexity:null, claude:null};
-    if (c.model === 'perplexity-sonar') grid[c.query].perplexity = c.frontlinehq_appears;
-    if (c.model === 'claude-web')       grid[c.query].claude     = c.frontlinehq_appears;
+    // frontlinehq_appears is boolean — preserve false (not null) so ✗ renders
+    if (c.model === 'perplexity-sonar') grid[c.query].perplexity = c.frontlinehq_appears === true ? true : false;
+    if (c.model === 'claude-web')       grid[c.query].claude     = c.frontlinehq_appears === true ? true : false;
   });
 
   const entries = Object.entries(grid);
@@ -421,17 +438,19 @@ function renderCitationGrid() {
   return `
   <div class="section-block">
     <div class="section-head">Citation Tracker — Engine Coverage</div>
-    <table class="data-table grid-table">
-      <thead>
-        <tr>
-          <th>Query</th>
-          <th>Google</th>
-          <th>Perplexity</th>
-          <th>Claude</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
+    <div class="grid-wrap">
+      <table class="data-table grid-table">
+        <thead>
+          <tr>
+            <th>Query</th>
+            <th>Google</th>
+            <th>Perplexity</th>
+            <th>Claude</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
   </div>`;
 }
 
