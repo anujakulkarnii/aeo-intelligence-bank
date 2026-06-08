@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import {
   LayoutDashboard, MessageSquare, Zap, Lightbulb, Search,
   TrendingUp, FileText, Brain, Building2, Menu, X, ChevronRight,
-  ArrowUpRight, Hash
+  Sparkles, Loader2
 } from 'lucide-react'
 
 // ─── data ─────────────────────────────────────────────────────────────────
@@ -91,7 +91,8 @@ function searchAll(data, query) {
 function GlobalSearch({ data, onNavigate }) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
-  const [focused, setFocused] = useState(0)
+  const [aiAnswer, setAiAnswer] = useState(null)
+  const [aiLoading, setAiLoading] = useState(false)
   const inputRef = useRef(null)
   const results = useMemo(() => searchAll(data, query), [data, query])
 
@@ -102,7 +103,7 @@ function GlobalSearch({ data, onNavigate }) {
         inputRef.current?.focus()
         setOpen(true)
       }
-      if (e.key === 'Escape') { setOpen(false); setQuery('') }
+      if (e.key === 'Escape') { setOpen(false); setQuery(''); setAiAnswer(null) }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -112,6 +113,36 @@ function GlobalSearch({ data, onNavigate }) {
     onNavigate(SECTION_NAV[result.section])
     setOpen(false)
     setQuery('')
+    setAiAnswer(null)
+  }
+
+  async function askAI() {
+    if (!query.trim() || aiLoading) return
+    setAiLoading(true)
+    setAiAnswer(null)
+    try {
+      const res = await fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: query }),
+      })
+      const json = await res.json()
+      setAiAnswer(json.answer || json.error || 'No answer returned.')
+    } catch (e) {
+      setAiAnswer('Error reaching the AI endpoint.')
+    } finally {
+      setAiLoading(false)
+    }
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') askAI()
+  }
+
+  function handleChange(e) {
+    setQuery(e.target.value)
+    setAiAnswer(null)
+    setOpen(true)
   }
 
   return (
@@ -123,43 +154,87 @@ function GlobalSearch({ data, onNavigate }) {
         <input
           ref={inputRef}
           value={query}
-          onChange={e => { setQuery(e.target.value); setOpen(true) }}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
           onFocus={() => setOpen(true)}
-          onBlur={() => setTimeout(() => setOpen(false), 150)}
-          placeholder="Search the bank…"
+          onBlur={() => setTimeout(() => { setOpen(false) }, 200)}
+          placeholder="Search or ask anything… (↵ for AI answer)"
           className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
         />
         {query ? (
-          <button onClick={() => { setQuery(''); setOpen(false) }}>
-            <X size={12} className="text-muted-foreground hover:text-foreground" />
-          </button>
+          <div className="flex items-center gap-1.5">
+            {aiLoading
+              ? <Loader2 size={12} className="text-muted-foreground animate-spin" />
+              : (
+                <button
+                  onMouseDown={e => { e.preventDefault(); askAI() }}
+                  className="flex items-center gap-1 text-2xs text-primary font-medium hover:underline"
+                >
+                  <Sparkles size={10} />Ask AI
+                </button>
+              )
+            }
+            <button onMouseDown={() => { setQuery(''); setAiAnswer(null); setOpen(false) }}>
+              <X size={12} className="text-muted-foreground hover:text-foreground" />
+            </button>
+          </div>
         ) : (
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 text-2xs text-muted-foreground border border-border rounded px-1 py-0.5 font-mono">
-            ⌘K
-          </kbd>
+          <kbd className="hidden sm:inline-flex items-center text-2xs text-muted-foreground border border-border rounded px-1 py-0.5 font-mono">⌘K</kbd>
         )}
       </div>
 
       {open && query.trim() && (
-        <div className="absolute top-full mt-1.5 left-0 right-0 bg-white rounded-lg border border-border shadow-lg z-50 overflow-hidden">
-          {results.length === 0 ? (
-            <div className="px-4 py-3 text-sm text-muted-foreground">No results for "{query}"</div>
-          ) : (
+        <div className="absolute top-full mt-1.5 left-0 right-0 bg-white rounded-lg border border-border shadow-lg z-50 overflow-hidden max-h-[480px] overflow-y-auto">
+
+          {/* AI Answer */}
+          {(aiAnswer || aiLoading) && (
+            <div className="p-4 border-b border-border bg-muted/30">
+              <div className="flex items-center gap-1.5 mb-2">
+                <Sparkles size={11} className="text-primary" />
+                <span className="text-2xs font-semibold text-primary uppercase tracking-wider">AI Answer</span>
+              </div>
+              {aiLoading
+                ? <p className="text-sm text-muted-foreground animate-pulse">Thinking…</p>
+                : <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{aiAnswer}</p>
+              }
+            </div>
+          )}
+
+          {/* Keyword results */}
+          {!aiAnswer && results.length > 0 && (
             <div>
               {results.map((r, i) => (
                 <button
                   key={i}
                   onMouseDown={() => handleSelect(r)}
-                  className={`w-full flex items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60 ${focused === i ? 'bg-muted/60' : ''}`}
+                  className="w-full flex items-start gap-3 px-4 py-2.5 text-left transition-colors hover:bg-muted/60"
                 >
-                  <span className="shrink-0 mt-0.5 text-2xs font-medium text-muted-foreground uppercase tracking-wider w-16 pt-0.5">{r.label}</span>
+                  <span className="shrink-0 text-2xs font-medium text-muted-foreground uppercase tracking-wider w-16 pt-0.5">{r.label}</span>
                   <span className="text-sm text-foreground leading-snug line-clamp-2 flex-1">{r.display}</span>
                   <ChevronRight size={12} className="text-muted-foreground shrink-0 mt-1" />
                 </button>
               ))}
-              <div className="px-4 py-2 border-t border-border">
-                <span className="text-2xs text-muted-foreground">{results.length} results across {[...new Set(results.map(r => r.section))].length} sections</span>
+              <div className="px-4 py-2 border-t border-border flex items-center justify-between">
+                <span className="text-2xs text-muted-foreground">{results.length} results</span>
+                <button
+                  onMouseDown={e => { e.preventDefault(); askAI() }}
+                  className="text-2xs text-primary font-medium flex items-center gap-1 hover:underline"
+                >
+                  <Sparkles size={10} />Ask AI instead
+                </button>
               </div>
+            </div>
+          )}
+
+          {!aiAnswer && results.length === 0 && !aiLoading && (
+            <div className="px-4 py-4">
+              <p className="text-sm text-muted-foreground mb-2">No keyword matches for "{query}"</p>
+              <button
+                onMouseDown={e => { e.preventDefault(); askAI() }}
+                className="flex items-center gap-1.5 text-sm text-primary font-medium hover:underline"
+              >
+                <Sparkles size={12} />Ask AI about this
+              </button>
             </div>
           )}
         </div>
@@ -442,7 +517,7 @@ function OverviewPage({ data }) {
         )}
         {sourceCounts.length > 0 && (
           <Card>
-            <SectionHeader title="ICP Source Breakdown" description="Where language was found" />
+            <SectionHeader title="ICP Source Breakdown" description="Number of ICP phrases by source — where your customers' exact language was found" />
             <div className="p-5"><BarChart data={sourceCounts} /></div>
           </Card>
         )}
@@ -572,9 +647,15 @@ function HooksPage({ data, search, teamFilter }) {
         <SectionHeader title="Outbound Hooks" count={hooks.length} description="Message angles for sales & marketing" />
         <div className="divide-y divide-border">
           {hooks.map(h => (
-            <div key={h.id} className="px-5 py-3 flex items-start gap-4">
-              <p className="text-sm text-foreground flex-1">{h.text}</p>
-              <div className="flex items-center gap-1.5 shrink-0">
+            <div key={h.id} className="px-5 py-4">
+              <p className="text-sm text-foreground leading-relaxed">{h.text}</p>
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
+                {h.source && (
+                  <span className="flex items-center gap-1 text-2xs font-medium text-muted-foreground">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary/60 inline-block" />
+                    {bucketOf(h.source)}
+                  </span>
+                )}
                 {(h.teams || []).map(t => <Tag key={t}>{t}</Tag>)}
                 {h.channel && <Tag>{h.channel}</Tag>}
               </div>
