@@ -188,7 +188,7 @@ function GlobalSearch({ data, onNavigate }) {
 
           {/* AI Answer */}
           {(aiAnswer || aiLoading) && (
-            <div className="p-4 border-b border-border border-l-2 border-l-primary bg-primary/[0.03]">
+            <div className="p-4 border-b border-border bg-[#f0faf6]" style={{ borderLeft: '3px solid #1D9E75' }}>
               <div className="flex items-center gap-1.5 mb-2">
                 <Sparkles size={11} className="text-primary" />
                 <span className="text-2xs font-semibold text-primary uppercase tracking-wider">AI Answer</span>
@@ -284,7 +284,7 @@ function Sidebar({ active, setActive, open, setOpen, data }) {
         {/* Logo */}
         <div className="px-4 h-[52px] flex items-center border-b border-border">
           <div>
-            <div className="text-sm font-semibold tracking-tight text-foreground">FrontlineHQ</div>
+            <div className="text-base font-bold tracking-tight text-foreground">FrontlineHQ</div>
             <div className="text-2xs text-muted-foreground tracking-widest uppercase mt-0.5">AEO / GEO Bank</div>
           </div>
         </div>
@@ -335,32 +335,38 @@ function Sidebar({ active, setActive, open, setOpen, data }) {
 
 function TopBar({ title, data, onNavigate, teamFilter, setTeamFilter, showTeamFilter, onMenuClick }) {
   return (
-    <header className="sticky top-0 z-10 bg-background/90 backdrop-blur-md border-b border-border h-[52px] flex items-center px-5 gap-4">
-      <button onClick={onMenuClick} className="lg:hidden">
-        <Menu size={16} className="text-muted-foreground" />
-      </button>
-      <h1 className="text-sm font-semibold text-foreground shrink-0">{title}</h1>
-      <div className="flex-1">
-        <GlobalSearch data={data} onNavigate={onNavigate} />
-      </div>
-      {showTeamFilter && (
-        <div className="hidden lg:flex items-center gap-1">
-          {['All', ...ALL_TEAMS].map(t => (
-            <button
-              key={t}
-              onClick={() => setTeamFilter(t === 'All' ? null : t)}
-              className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                (t === 'All' && !teamFilter) || teamFilter === t
-                  ? 'bg-foreground text-background'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {t}
-            </button>
-          ))}
+    <div className="sticky top-0 z-10 bg-background/90 backdrop-blur-md border-b border-border">
+      {/* Search row */}
+      <div className="h-[52px] flex items-center px-5 gap-3">
+        <button onClick={onMenuClick} className="lg:hidden">
+          <Menu size={16} className="text-muted-foreground" />
+        </button>
+        <div className="flex-1">
+          <GlobalSearch data={data} onNavigate={onNavigate} />
         </div>
-      )}
-    </header>
+        {showTeamFilter && (
+          <div className="hidden lg:flex items-center gap-1">
+            {['All', ...ALL_TEAMS].map(t => (
+              <button
+                key={t}
+                onClick={() => setTeamFilter(t === 'All' ? null : t)}
+                className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                  (t === 'All' && !teamFilter) || teamFilter === t
+                    ? 'bg-foreground text-background'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+      {/* Page title row */}
+      <div className="px-6 py-2.5 border-t border-border">
+        <h1 className="text-sm font-semibold text-foreground">{title}</h1>
+      </div>
+    </div>
   )
 }
 
