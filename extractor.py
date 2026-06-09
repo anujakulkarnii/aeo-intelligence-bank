@@ -76,10 +76,22 @@ def extract_icp_language(
 
     for i, chunk in enumerate(chunks, 1):
         print(f"  [chunk {i}/{len(chunks)}] {len(chunk)} results...")
-        text_block   = format_results_for_extraction(chunk)
+        text_block = format_results_for_extraction(chunk)
+
+        # Build a geography context hint from the chunk's geography tags
+        chunk_geos = list({r.get("geography", "Unknown") for r in chunk if r.get("geography")})
+        if len(chunk_geos) == 1:
+            geo_hint = f"NOTE: All results in this batch are from {chunk_geos[0]}. Tag geography accordingly."
+        elif chunk_geos:
+            geo_hint = f"NOTE: Results in this batch include mixed geographies: {', '.join(sorted(chunk_geos))}. Use the geography field from the search context to tag each entry accurately."
+        else:
+            geo_hint = ""
+
         user_message = (
             "Here are search result snippets from Reddit and review sites. "
-            "Extract ICP language as instructed.\n\n"
+            "Extract ICP language as instructed.\n"
+            + (f"{geo_hint}\n" if geo_hint else "")
+            + "\n"
             + text_block
         )
 

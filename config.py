@@ -44,7 +44,7 @@ SEED_QUERIES = [
     "staff onboarding program from scratch restaurant",
 ]
 
-# ── Target Markets (US only — Phase 2 adds UK) ───────────────────────────────
+# ── Target Markets ───────────────────────────────────────────────────────────
 
 TARGET_MARKETS = [
     {
@@ -52,9 +52,30 @@ TARGET_MARKETS = [
         "country": "us",
         "location": "New York, United States",
     },
+    {
+        "name": "UK",
+        "country": "gb",
+        "location": "London, United Kingdom",
+        "seed_queries": [
+            "training inconsistency across different pub or restaurant sites UK",
+            "hospitality staff onboarding multiple locations UK problem",
+            "how to standardise training across UK restaurant chain",
+            "frontline staff turnover hospitality UK operations",
+            "replace spreadsheets slack for UK hospitality team communication",
+        ],
+        "reddit_searches": [
+            'site:reddit.com "UK" "restaurant" OR "pub" "staff training" problem',
+            'site:reddit.com "UK" "hospitality" "onboarding" "multiple" locations',
+            'site:reddit.com "UK" "frontline" staff consistency locations',
+            'site:reddit.com "UK" Deputy OR Axonify OR Harri complaints',
+            'site:reddit.com "UK" "workforce management" hospitality',
+        ],
+    },
 ]
 
 # ── Competitors ───────────────────────────────────────────────────────────────
+
+UK_SPECIFIC_COMPETITORS = ["Harri", "Fourth", "Access People", "Planday"]
 
 COMPETITORS = [
     "Deputy",
@@ -64,7 +85,7 @@ COMPETITORS = [
     "Beekeeper",
     "Connecteam",
     "7shifts",
-]
+] + UK_SPECIFIC_COMPETITORS
 
 # ── Reddit Search Strings ─────────────────────────────────────────────────────
 

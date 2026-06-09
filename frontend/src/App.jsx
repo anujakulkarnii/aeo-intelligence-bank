@@ -671,17 +671,52 @@ function OverviewPage({ data }) {
 // ─── icp page ────────────────────────────────────────────────────────────
 
 function IcpPage({ data, search, teamFilter }) {
+  const [geoFilter, setGeoFilter] = React.useState(null)
+
   const phrases = useMemo(() => {
     let items = data?.icp_phrases || []
     if (teamFilter) items = items.filter(p => p.teams?.includes(teamFilter))
     if (search) items = items.filter(p => p.text?.toLowerCase().includes(search.toLowerCase()))
+    if (geoFilter === 'Unknown') items = items.filter(p => !p.geography || p.geography === 'Unknown')
+    else if (geoFilter) items = items.filter(p => p.geography === geoFilter)
     return items
-  }, [data, search, teamFilter])
+  }, [data, search, teamFilter, geoFilter])
+
+  const allPhrases = data?.icp_phrases || []
+  const geoCounts = useMemo(() => {
+    const counts = { US: 0, UK: 0, Unknown: 0 }
+    allPhrases.forEach(p => {
+      const g = p.geography
+      if (g === 'US') counts.US++
+      else if (g === 'UK') counts.UK++
+      else counts.Unknown++
+    })
+    return counts
+  }, [allPhrases])
 
   return (
     <div className="p-6">
       <Card>
         <SectionHeader title="ICP Phrases" count={phrases.length} description="Customer language from community & reviews" />
+        <div className="px-5 py-3 flex items-center gap-2 border-b border-border">
+          {[null, 'US', 'UK', 'Unknown'].map(geo => {
+            const label = geo === null ? 'All' : geo
+            const count = geo === null ? allPhrases.length : geoCounts[geo] || 0
+            return (
+              <button
+                key={label}
+                onClick={() => setGeoFilter(geo)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  geoFilter === geo
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                }`}
+              >
+                {label} {count > 0 && <span className="opacity-70">({count})</span>}
+              </button>
+            )
+          })}
+        </div>
         <div className="divide-y divide-border">
           {phrases.map(p => (
             <div key={p.id} className="px-5 py-3 flex items-start gap-4">

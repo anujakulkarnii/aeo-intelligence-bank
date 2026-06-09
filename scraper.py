@@ -24,10 +24,14 @@ def _search(
     query: str,
     max_results: int = RESULTS_PER_QUERY,
     search_depth: str = "basic",
+    country: str = None,
+    location: str = None,
 ) -> Optional[dict]:
     """
     Single Tavily search call. Returns raw response dict or None on failure.
     search_depth: "basic" (1 credit) or "advanced" (2 credits).
+    country: optional ISO country code (e.g. "us", "gb") for geo-targeting.
+    location: optional location string (e.g. "London, United Kingdom").
     """
     if not TAVILY_API_KEY:
         print("[scraper] ERROR: TAVILY_API_KEY not set.")
@@ -40,6 +44,10 @@ def _search(
         "search_depth": search_depth,
         "include_answer": False,
     }
+    if country:
+        payload["country"] = country
+    if location:
+        payload["location"] = location
 
     try:
         resp = requests.post(TAVILY_BASE_URL, json=payload, timeout=20)
@@ -85,26 +93,33 @@ def _detect_competitors(results: list[dict]) -> list[str]:
 
 def run_geo_searches(queries: list = None) -> list[dict]:
     """
-    Run all seed queries for configured markets (US only in Phase 1).
-    Accepts an optional queries list (defaults to SEED_QUERIES from config).
+    Run all seed queries for configured markets.
+    Accepts an optional queries list (used as fallback for markets without seed_queries).
     Returns list of citation records.
     """
     if queries is None:
         queries = SEED_QUERIES
 
     citations = []
-    total = len(queries) * len(TARGET_MARKETS)
+    # Calculate total considering per-market seed_queries
+    total = sum(len(m.get("seed_queries", queries)) for m in TARGET_MARKETS)
     done  = 0
 
     print(f"\n[scraper] Running {total} geo seed query searches "
-          f"({len(queries)} queries × {len(TARGET_MARKETS)} market)...")
+          f"({len(TARGET_MARKETS)} market(s))...")
 
     for market in TARGET_MARKETS:
-        for query in queries:
+        market_queries = market.get("seed_queries", queries)
+        for query in market_queries:
             done += 1
             print(f"  [{done}/{total}] {market['name']}: {query[:60]}...")
 
-            raw     = _search(query, max_results=RESULTS_PER_QUERY)
+            raw     = _search(
+                query,
+                max_results=RESULTS_PER_QUERY,
+                country=market.get("country"),
+                location=market.get("location"),
+            )
             results = _extract_results(raw)
 
             all_text = " ".join(
@@ -136,47 +151,65 @@ def run_geo_searches(queries: list = None) -> list[dict]:
     return citations
 
 
-def run_reddit_searches() -> list[dict]:
+def run_reddit_searches(market: dict = None) -> list[dict]:
     """
     Run Reddit-specific searches via Tavily.
-    Returns flat list of result dicts tagged source='reddit'.
+    If market is provided and has 'reddit_searches', use those; otherwise use global REDDIT_SEARCHES.
+    Returns flat list of result dicts tagged source='reddit' and geography=market name.
     """
-    all_results = []
-    print(f"\n[scraper] Running {len(REDDIT_SEARCHES)} Reddit searches...")
+    if market and market.get("reddit_searches"):
+        searches = market["reddit_searches"]
+        geo_tag  = market["name"]
+        country  = market.get("country")
+    else:
+        searches = REDDIT_SEARCHES
+        geo_tag  = "US" if not market else market.get("name", "Unknown")
+        country  = market.get("country") if market else None
 
-    for i, query in enumerate(REDDIT_SEARCHES, 1):
-        print(f"  [{i}/{len(REDDIT_SEARCHES)}] {query[:70]}...")
-        raw     = _search(query, max_results=RESULTS_PER_QUERY)
+    all_results = []
+    label = f"{geo_tag} Reddit" if market else "Reddit"
+    print(f"\n[scraper] Running {len(searches)} {label} searches...")
+
+    for i, query in enumerate(searches, 1):
+        print(f"  [{i}/{len(searches)}] {query[:70]}...")
+        raw     = _search(query, max_results=RESULTS_PER_QUERY, country=country)
         results = _extract_results(raw)
         for r in results:
             r["source"]       = "reddit"
             r["search_query"] = query
+            r["geography"]    = geo_tag
         all_results.extend(results)
         time.sleep(0.2)
 
-    print(f"[scraper] Reddit searches returned {len(all_results)} results.")
+    print(f"[scraper] {label} searches returned {len(all_results)} results.")
     return all_results
 
 
-def run_competitor_review_searches() -> list[dict]:
+def run_competitor_review_searches(market: dict = None) -> list[dict]:
     """
     Run G2/Capterra competitor review searches via Tavily.
+    Passes market country for geo-targeting and tags results with geography.
     Returns flat list of result dicts tagged source='review_site'.
     """
+    geo_tag = market["name"] if market else "US"
+    country = market.get("country") if market else None
+
     all_results = []
-    print(f"\n[scraper] Running {len(COMPETITOR_REVIEW_SEARCHES)} competitor review searches...")
+    label = f"{geo_tag} competitor reviews" if market else "competitor reviews"
+    print(f"\n[scraper] Running {len(COMPETITOR_REVIEW_SEARCHES)} {label} searches...")
 
     for i, query in enumerate(COMPETITOR_REVIEW_SEARCHES, 1):
         print(f"  [{i}/{len(COMPETITOR_REVIEW_SEARCHES)}] {query[:70]}...")
-        raw     = _search(query, max_results=RESULTS_PER_QUERY)
+        raw     = _search(query, max_results=RESULTS_PER_QUERY, country=country)
         results = _extract_results(raw)
         for r in results:
             r["source"]       = "review_site"
             r["search_query"] = query
+            r["geography"]    = geo_tag
         all_results.extend(results)
         time.sleep(0.2)
 
-    print(f"[scraper] Competitor review searches returned {len(all_results)} results.")
+    print(f"[scraper] {label} searches returned {len(all_results)} results.")
     return all_results
 
 

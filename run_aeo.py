@@ -20,6 +20,7 @@ from config import (
     EMAIL_RECIPIENT,
     ANTHROPIC_MODEL,
     SEED_QUERIES,
+    TARGET_MARKETS,
 )
 
 
@@ -166,17 +167,21 @@ def run(dry_run: bool = False) -> None:
         traceback.print_exc()
 
     # ─────────────────────────────────────────────────────────────────────────
-    # STEP 3 — Reddit + competitor review scraping
+    # STEP 3 — Reddit + competitor review scraping (per market)
     # ─────────────────────────────────────────────────────────────────────────
     _section("STEP 3 / 8 — Reddit & Competitor Review Searches")
     reddit_results = []
     review_results = []
     try:
         from scraper import run_reddit_searches, run_competitor_review_searches
-        reddit_results = run_reddit_searches()
-        review_results = run_competitor_review_searches()
+        for market in TARGET_MARKETS:
+            m_reddit  = run_reddit_searches(market)
+            m_reviews = run_competitor_review_searches(market)
+            print(f"\n[step 3] {market['name']}: Reddit {len(m_reddit)} | Reviews {len(m_reviews)}")
+            reddit_results.extend(m_reddit)
+            review_results.extend(m_reviews)
         steps_completed.append("community_searches")
-        print(f"\n[step 3] Reddit: {len(reddit_results)} | Reviews: {len(review_results)}")
+        print(f"\n[step 3] Total — Reddit: {len(reddit_results)} | Reviews: {len(review_results)}")
 
     except Exception as e:
         print(f"[step 3] FAILED: {e}")
