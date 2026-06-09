@@ -49,12 +49,12 @@ SEED_QUERIES = [
 TARGET_MARKETS = [
     {
         "name": "US",
-        "country": "us",
+        "country": "united states",
         "location": "New York, United States",
     },
     {
         "name": "UK",
-        "country": "gb",
+        "country": "united kingdom",
         "location": "London, United Kingdom",
         "seed_queries": [
             "training inconsistency across different pub or restaurant sites UK",
